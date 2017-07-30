@@ -8,6 +8,8 @@ set tabstop=2
 set shiftwidth=2
 set noautoindent
 set nosmartindent
+" クリップボード-----------------------------
+set clipboard=unnamed,autoselect
 "Color Scheme--------------------------------
 syntax on
 "colorscheme molokai
@@ -22,6 +24,7 @@ colorscheme vimbrains
 :command Nt NERDTree
 "JavaScript----------------------------------
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
+let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
 "neco----------------------------------------
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -37,6 +40,38 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : ''
     \ }
+
+" gotags
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+
+" gocode
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplcache#undo_completion()
@@ -87,10 +122,13 @@ NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'vim-scripts/grep.vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'vim-airline/vim-airline'
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 " ------ Go
 NeoBundleLazy 'fatih/vim-go', { 'autoload' : { 'filetypes' : 'go'  } }
+NeoBundleLazy 'vim-jp/vim-go-extra', { 'autoload' : { 'filetypes' : 'go'  } }
 " ------ JavaScript
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'mattn/jscomplete-vim'
