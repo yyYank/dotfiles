@@ -13,11 +13,24 @@ colorscheme vimbrains "Color Scheme
 " Command Alias------------------------------
 :command Nt NERDTree
 " Command key mapping------------------------
+nmap <C-o> :copen<CR>
+nmap <F7> :Ag<CR>
 nmap <C-g> :Rgrep<CR>
 nmap <F8> :Tagbar<CR>
 nmap <C-n> :NERDTreeToggle<CR>
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+"grep.vi,
+if executable('ag') " require ag
+      let g:Fgrep_Path='/usr/local/bin/ag'
+      let g:Grep_Path='/usr/local/bin/ag'
+endif
+let g:Grep_Null_Device = '/dev/null'
+"ctrlp---------------------------------------
+if executable('ag') " require ag
+      let g:ctrlp_use_caching=0
+      let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+endif
 "JavaScript----------------------------------
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
 let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
@@ -163,6 +176,7 @@ NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle "ctrlpvim/ctrlp.vim"
+NeoBundle 'rking/ag.vim'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-airline/vim-airline'
