@@ -15,7 +15,9 @@ colorscheme vimbrains "Color Scheme
 " Command key mapping------------------------
 nmap <C-o> :copen<CR>
 nmap <F7> :Ag<CR>
-nmap <C-g> :Rgrep<CR>
+nmap <C-f> :CtrlPLine<CR>
+nmap <C-g> :FlyGrep<CR>
+nmap <C-h> :Rgrep<CR>
 nmap <F8> :Tagbar<CR>
 nmap <C-n> :NERDTreeToggle<CR>
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
@@ -177,6 +179,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'rking/ag.vim'
+NeoBundle 'wsdjeg/FlyGrep.vim'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-airline/vim-airline'
