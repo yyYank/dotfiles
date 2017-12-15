@@ -23,15 +23,18 @@ nmap <C-n> :NERDTreeToggle<CR>
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 "grep.vi,
-if executable('ag') " require ag
-      let g:Fgrep_Path='/usr/local/bin/ag'
-      let g:Grep_Path='/usr/local/bin/ag'
+if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+      let g:Fgrep_Path='/usr/local/bin/rg'
+      let g:Grep_Path='/usr/local/bin/rg'
+      set wildignore+=*/.git/*,*/tmp/*,*.swp
 endif
 let g:Grep_Null_Device = '/dev/null'
 "ctrlp---------------------------------------
-if executable('ag') " require ag
+if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+      set grepprg=rg\ --color=never
       let g:ctrlp_use_caching=0
-      let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+      let g:ctrlp_user_command='rg %s --files --color==never --glob ""'
+      "let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
 endif
 "JavaScript----------------------------------
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
