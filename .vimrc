@@ -10,11 +10,9 @@ set noundofile " .un~という謎ファイル要らない
 set clipboard=unnamed,autoselect " clip board 
 syntax on
 colorscheme vimbrains "Color Scheme
-" Command Alias------------------------------
-:command Nt NERDTree
 " Command key mapping------------------------
 nmap <C-o> :copen<CR>
-nmap <F7> :Ag<CR>
+nmap <F7> :Rg<CR>
 nmap <C-f> :CtrlPLine<CR>
 nmap <C-g> :FlyGrep<CR>
 nmap <C-h> :Rgrep<CR>
@@ -27,6 +25,11 @@ if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
       let g:Fgrep_Path='/usr/local/bin/rg'
       let g:Grep_Path='/usr/local/bin/rg'
       set wildignore+=*/.git/*,*/tmp/*,*.swp
+endif
+" Flygrep
+if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+      let g:FlyGrep_search_tools = ['rg']
+      let g:FlyGrep_input_delay = 200
 endif
 let g:Grep_Null_Device = '/dev/null'
 "ctrlp---------------------------------------
@@ -184,6 +187,7 @@ NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'rking/ag.vim'
 NeoBundle 'wsdjeg/FlyGrep.vim'
 NeoBundle 'vim-scripts/grep.vim'
+NeoBundle 'jremmen/vim-ripgrep'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'Yggdroot/indentLine'
