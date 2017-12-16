@@ -159,59 +159,83 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave = 1
 "let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-"NeoBundle Scripts-----------------------------
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+
+"dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim
-" Required:
-call neobundle#begin(expand('~/vagrant/.vim/bundle'))
+set runtimepath+=/Users/yy_yank/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+if dein#load_state('/Users/yy_yank/.vim/dein')
+  call dein#begin('/Users/yy_yank/.vim/dein')
 
-" NeoBundle my dependency------------------------------------
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/yy_yank/.vim/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
 " ------ Vim
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'vim-syntastic/syntastic'
-NeoBundle 'ryanoasis/vim-devicons'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle "ctrlpvim/ctrlp.vim"
-NeoBundle 'rking/ag.vim'
-NeoBundle 'wsdjeg/FlyGrep.vim'
-NeoBundle 'vim-scripts/grep.vim'
-NeoBundle 'jremmen/vim-ripgrep'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'mattn/vim-terminal'
+call dein#begin(expand('~/.vim/dein'))
+call dein#add('tpope/vim-fugitive')
+call dein#add('Shougo/neocomplcache.vim')
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('vim-syntastic/syntastic')
+call dein#add('ryanoasis/vim-devicons')
+call dein#add('scrooloose/nerdtree')
+call dein#add('jistr/vim-nerdtree-tabs')
+call dein#add("ctrlpvim/ctrlp.vim")
+call dein#add('rking/ag.vim')
+call dein#add('wsdjeg/FlyGrep.vim')
+call dein#add('vim-scripts/grep.vim')
+call dein#add('jremmen/vim-ripgrep')
+call dein#add('majutsushi/tagbar')
+call dein#add('vim-airline/vim-airline')
+call dein#add('Yggdroot/indentLine')
+call dein#add('Townk/vim-autoclose')
+call dein#add('mattn/vim-terminal')
 " ------ Go
-NeoBundleLazy 'fatih/vim-go', { 'autoload' : { 'filetypes' : 'go'  } }
-NeoBundleLazy 'vim-jp/vim-go-extra', { 'autoload' : { 'filetypes' : 'go'  } }
+call dein#add('fatih/vim-go', { 'autoload' : { 'filetypes' : 'go'  } })
+call dein#add('vim-jp/vim-go-extra', { 'autoload' : { 'filetypes' : 'go'  } })
 " ------ JavaScript
-NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'mattn/jscomplete-vim'
-NeoBundle 'ternjs/tern_for_vim'
+call dein#add( 'jelera/vim-javascript-syntax')
+call dein#add( 'mattn/jscomplete-vim')
+call dein#add( 'ternjs/tern_for_vim')
 " ------ python
-NeoBundle 'python-mode/python-mode'
+call dein#add( 'python-mode/python-mode')
 " ------ syntax checker
-NeoBundle 'scrooloose/syntastic'
+call dein#add( 'scrooloose/syntastic')
 " -----------------------------------------------
 
 " Required:
-call neobundle#end()
+call dein#end()
+call dein#install()
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
