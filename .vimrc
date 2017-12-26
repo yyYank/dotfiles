@@ -115,8 +115,6 @@ let g:tagbar_type_javascript = {
         \ 'r:variables:0:0',
     \ ],
 \ }
-
-" gocode
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 " neco key-mappings.
 "inoremap <expr><C-g>     neocomplcache#undo_completion()
@@ -151,7 +149,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 "set snippet file dir
-let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/,~/.vim/snippets'
+let g:neosnippet#snippets_directory='~/.vim/dein/neosnippet-snippets/snippets/,~/.vim/snippets'
 "scroloose/syntastic---------------------------
 let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go'] }
@@ -159,10 +157,6 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave = 1
 "let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -183,8 +177,39 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
-  " You can specify revision/branch/tag.
-  "call dein#add('Shougo/deol.nvim', {'rev': 'a1b5108fd' })
+  " ------ Vim
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('jistr/vim-nerdtree-tabs')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('vim-syntastic/syntastic')
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add("ctrlpvim/ctrlp.vim")
+  call dein#add('rking/ag.vim')
+  call dein#add('wsdjeg/FlyGrep.vim')
+  call dein#add('vim-scripts/grep.vim')
+  call dein#add('jremmen/vim-ripgrep')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('Townk/vim-autoclose')
+  call dein#add('mattn/vim-terminal')
+  call dein#add('valloric/youcompleteme')
+  " ------ Go
+  call dein#add('fatih/vim-go')
+  call dein#add('vim-jp/vim-go-extra')
+  " ------ JavaScript
+  call dein#add( 'jelera/vim-javascript-syntax')
+  call dein#add( 'mattn/jscomplete-vim')
+  call dein#add( 'ternjs/tern_for_vim')
+  " ------ python
+  call dein#add( 'python-mode/python-mode')
+  " ------ syntax checker
+  call dein#add( 'scrooloose/syntastic')
+  " -----------------------------------------------
+
 
 
   " Required:
@@ -196,48 +221,13 @@ endif
 filetype plugin indent on
 syntax enable
 
-"End dein Scripts-------------------------
-" ------ Vim
-call dein#begin(expand('~/.vim/dein'))
-call dein#add('tpope/vim-fugitive')
-call dein#add('Shougo/neocomplcache.vim')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('vim-syntastic/syntastic')
-call dein#add('ryanoasis/vim-devicons')
-call dein#add('scrooloose/nerdtree')
-call dein#add('jistr/vim-nerdtree-tabs')
-call dein#add("ctrlpvim/ctrlp.vim")
-call dein#add('rking/ag.vim')
-call dein#add('wsdjeg/FlyGrep.vim')
-call dein#add('vim-scripts/grep.vim')
-call dein#add('jremmen/vim-ripgrep')
-call dein#add('majutsushi/tagbar')
-call dein#add('vim-airline/vim-airline')
-call dein#add('Yggdroot/indentLine')
-call dein#add('Townk/vim-autoclose')
-call dein#add('mattn/vim-terminal')
-call dein#add('valloric/youcompleteme')
-" ------ Go
-call dein#add('fatih/vim-go', { 'autoload' : { 'filetypes' : 'go'  } })
-call dein#add('vim-jp/vim-go-extra', { 'autoload' : { 'filetypes' : 'go'  } })
-" ------ JavaScript
-call dein#add( 'jelera/vim-javascript-syntax')
-call dein#add( 'mattn/jscomplete-vim')
-call dein#add( 'ternjs/tern_for_vim')
-" ------ python
-call dein#add( 'python-mode/python-mode')
-" ------ syntax checker
-call dein#add( 'scrooloose/syntastic')
-" -----------------------------------------------
-
-" Required:
-call dein#end()
 " If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
 endif
+"End dein Scripts-------------------------
 
 
-" Required:
-filetype plugin indent on
+"vim-go
+let g:go_autodetect_gopath = 0
+au FileType go let $GOPATH = go#path#Detect()
