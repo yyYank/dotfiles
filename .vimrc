@@ -184,7 +184,8 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   call dein#add('Shougo/neosnippet-snippets')
 
   " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
+  "call dein#add('Shougo/deol.nvim', {'rev': 'a1b5108fd' })
+
 
   " Required:
   call dein#end()
@@ -194,11 +195,6 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
-
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
 
 "End dein Scripts-------------------------
 " ------ Vim
@@ -221,6 +217,7 @@ call dein#add('vim-airline/vim-airline')
 call dein#add('Yggdroot/indentLine')
 call dein#add('Townk/vim-autoclose')
 call dein#add('mattn/vim-terminal')
+call dein#add('valloric/youcompleteme')
 " ------ Go
 call dein#add('fatih/vim-go', { 'autoload' : { 'filetypes' : 'go'  } })
 call dein#add('vim-jp/vim-go-extra', { 'autoload' : { 'filetypes' : 'go'  } })
@@ -236,6 +233,11 @@ call dein#add( 'scrooloose/syntastic')
 
 " Required:
 call dein#end()
-call dein#install()
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+
 " Required:
 filetype plugin indent on
