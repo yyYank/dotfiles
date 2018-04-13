@@ -208,6 +208,7 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('Townk/vim-autoclose')
   call dein#add('mattn/vim-terminal')
+  call dein#add('airblade/vim-gitgutter')
   " ------ Go
   call dein#add('fatih/vim-go', {'rev': '4f04d680e3095a683e6654d756cbd0d27f6d2df0'})
 "{ 'rev': 'a1b5108fd5' }
