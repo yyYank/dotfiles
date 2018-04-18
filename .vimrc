@@ -12,6 +12,7 @@ set rtp+=$GOROOT/misc/vim
 syntax on
 " colorscheme vimbrains "Color Scheme
 " Command key mapping------------------------
+nnoremap ; :
 nmap <C-o> :copen<CR>
 nmap <F7> :Rg<CR>
 nmap <C-f> :CtrlPLine<CR>
