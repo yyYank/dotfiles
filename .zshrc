@@ -54,7 +54,8 @@ alias -g pghql='cd $(ghq list --p|peco) |pwd'
 # git action toward branch via peco
 alias -g pbg='git branch|peco|xargs git'
 alias -g co='branch|fzf|xargs git checkout'
-alias -g look='list|fzf|xargs ghq look'
+alias -g ghql='cd $(ghq list --p|fzf)'
+
 
 autoload -Uz compinit
 compinit
