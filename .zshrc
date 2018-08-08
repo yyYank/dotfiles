@@ -53,6 +53,8 @@ alias -g gbpath=' gb env |grep SRC | sed -e \''s/src//g\'' | sed -e \''s/GB_SRC_
 alias -g pghql='cd $(ghq list --p|peco) |pwd'
 # git action toward branch via peco
 alias -g pbg='git branch|peco|xargs git'
+alias -g co='branch|fzf|xargs git checkout'
+alias -g look='list|fzf|xargs ghq look'
 
 autoload -Uz compinit
 compinit
