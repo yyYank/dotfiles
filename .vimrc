@@ -76,7 +76,9 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : ''
     \ }
-
+    
+"highlightedyank----------------------------------------
+let g:highlightedyank_highlight_duration = 500
 " ale----------------------------------------
 " 保存時のみ実行する
 let g:ale_lint_on_text_changed = 1
@@ -195,6 +197,9 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   call dein#add('jistr/vim-nerdtree-tabs')
   " ------ Vim
   call dein#add('tpope/vim-fugitive')
+  call dein#add('lambdalisue/gina.vim')
+  call dein#add('andymass/vim-matchup')
+  call dein#add('machakann/vim-highlightedyank')
   call dein#add('Shougo/neocomplcache.vim')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
