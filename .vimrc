@@ -20,9 +20,10 @@ nmap <C-g> :FlyGrep<CR>
 nmap <C-h> :Rgrep<CR>
 nmap <F8> :TagbarOpen j<CR>
 nmap <C-n> :NERDTreeFocusToggle<CR>
+" vim-go
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
-"grep.vi,
+"rip-grep
 if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
       let g:Fgrep_Path='/usr/local/bin/rg'
       let g:Grep_Path='/usr/local/bin/rg'
@@ -43,6 +44,7 @@ if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
 endif
 "JavaScript----------------------------------
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
+let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
 " airline----------------------------------------
 let g:airline_powerline_fonts = 1
 "nere tree----------------------------------------
@@ -76,7 +78,7 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : ''
     \ }
-    
+
 "highlightedyank----------------------------------------
 let g:highlightedyank_highlight_duration = 500
 " ale----------------------------------------
@@ -173,6 +175,13 @@ if has('conceal')
 endif
 "set snippet file dir
 let g:neosnippet#snippets_directory='~/.vim/dein/neosnippet-snippets/snippets/,~/.vim/snippets'
+"scroloose/syntastic---------------------------
+let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['golint']
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -193,11 +202,9 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
+  " ------ Vim
   call dein#add('scrooloose/nerdtree')
   call dein#add('jistr/vim-nerdtree-tabs')
-  " ------ Vim
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('lambdalisue/gina.vim')
   call dein#add('andymass/vim-matchup')
   call dein#add('machakann/vim-highlightedyank')
   call dein#add('Shougo/neocomplcache.vim')
@@ -214,10 +221,13 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('Townk/vim-autoclose')
   call dein#add('mattn/vim-terminal')
+  " ------ Git
+  call dein#add('tpope/vim-fugitive')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('lambdalisue/gina.vim')
   " ------ Go
-  call dein#add('fatih/vim-go', {'rev': '4f04d680e3095a683e6654d756cbd0d27f6d2df0'})
-"{ 'rev': 'a1b5108fd5' }
+  call dein#add('fatih/vim-go')
+  call dein#add('nsf/gocode')
   call dein#add('vim-jp/vim-go-extra')
   " ------ JavaScript
   call dein#add( 'jelera/vim-javascript-syntax')
@@ -226,7 +236,9 @@ if dein#load_state('/Users/yy_yank/.vim/dein')
   " ------ python
   call dein#add( 'python-mode/python-mode')
   " ------ syntax checker
+  call dein#add('vim-syntastic/syntastic')
   call dein#add('w0rp/ale')
+  call dein#add( 'scrooloose/syntastic')
   " -----------------------------------------------
 
 
@@ -239,6 +251,9 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
+autocmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript
+  \ :setl omnifunc=jscomplete#CompleteJS
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
