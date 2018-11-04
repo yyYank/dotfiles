@@ -46,9 +46,8 @@ zstyle :compinstall filename '/Users/yy_yank/.zshrc'
 alias -g vi='/usr/local/bin/vim'
 alias -g vim='/usr/local/bin/vim'
 alias -g gvim='/usr/local/bin/gvim'
-# gb env -> GOPATH
-alias -g gbpath=' gb env |grep SRC | sed -e \''s/src//g\'' | sed -e \''s/GB_SRC_PATH=//g\''  '
-
+# set gb path to GOPATH(move to project root as a premise)
+alias -g gbpath='export GOPATH=/Users/yy_yank/go:$(pwd):$(pwd)/vendor'
 # ghq look via peco
 alias -g pghql='cd $(ghq list --p|peco) |pwd'
 # git action toward branch via peco
