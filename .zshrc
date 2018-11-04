@@ -1,3 +1,12 @@
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PGDATA=/usr/local/var/postgres
+fpath=(~/.zsh/zsh-completions/src $fpath)
+
 #ANSI Color Constants
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -49,13 +58,17 @@ alias -g gvim='/usr/local/bin/gvim'
 # set gb path to GOPATH(move to project root as a premise)
 alias -g gbpath='export GOPATH=/Users/yy_yank/go:$(pwd):$(pwd)/vendor'
 # ghq look via peco
-alias -g pghql='cd $(ghq list --p|peco) |pwd'
 # git action toward branch via peco
 alias -g pbg='git branch|peco|xargs git'
 alias -g co='branch|fzf|xargs git checkout'
 alias -g ghql='cd $(ghq list --p|fzf)'
 
-
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+  # Set Spaceship ZSH as a prompt
+  autoload -U promptinit; promptinit
+  prompt spaceship
