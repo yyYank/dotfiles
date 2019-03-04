@@ -1,0 +1,136 @@
+######################################################################
+## toml
+######################################################################
+# toml syntax
+[[plugins]] 
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+######################################################################
+## terminal
+######################################################################
+[[plugins]]
+repo = 'mattn/vim-terminal'
+######################################################################
+## git
+######################################################################
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+#[[plugins]]
+#"call dein#add('tpope/vim-fugitive')
+#[[plugins]]
+#"call dein#add('lambdalisue/gina.vim')
+######################################################################
+## Go
+######################################################################
+[[plugins]]
+repo = 'fatih/vim-go'
+hook_add = '''
+    autocmd FileType go nmap <leader>b  <Plug>(go-build)
+    autocmd FileType go nmap <leader>t  <Plug>(go-test)
+    nmap <C-i> :GoImports<CR>
+'''
+on_ft = 'go'
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+on_ft = 'go'
+
+#[[plugins]]
+#repo = 'zchee/deoplete-go', {'build': 'make'}
+######################################################################
+## js
+######################################################################
+[[plugins]]
+repo = 'jelera/vim-javascript-syntax'
+[[plugins]]
+repo = 'mattn/jscomplete-vim'
+hook_add = '''
+    let g:jscomplete_use = ['dom', 'moz', 'es6th']
+'''
+[[plugins]]
+repo = 'ternjs/tern_for_vim'
+######################################################################
+## python
+######################################################################
+[[plugins]]
+repo =  'python-mode/python-mode'
+
+
+######################################################################
+## syntax check
+######################################################################
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+    " 保存時のみ実行する
+    let g:ale_lint_on_text_changed = 1
+    " 表示に関する設定
+    let g:ale_sign_error = ''
+    let g:ale_sign_warning = ''
+    let g:airline#extensions#ale#open_lnum_symbol = '('
+    let g:airline#extensions#ale#close_lnum_symbol = ')'
+    let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+    let g:ale_lint_delay = 0
+    highlight link ALEErrorSign Tag
+    highlight link ALEWarningSign StorageClass
+    " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
+    "let g:ale_linters = {
+    "\   'go': ['gb build', 'go vet', 'golint'],
+    "\   'javascript': ['eslint'],
+    "\}
+    " Fix files with prettier, and then ESLint.
+    "let g:ale_fixers = {
+    "\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    "\   'javascript': ['prettier', 'eslint'],
+    "\}
+    " Equivalent to the above.
+    "let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+    " Set this variable to 1 to fix files when you save them.
+    "let g:ale_fix_on_save = 1
+'''
+######################################################################
+## for vim lsp 
+######################################################################
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+    " vim-lsp
+    let g:lsp_async_completion = 1
+    let g:asyncomplete_auto_popup = 0
+    let g:asyncomplete_remove_duplicates = 1
+    let g:asyncomplete_smart_completion = 1
+    if executable('golsp')
+      augroup LspGo
+        au!
+        autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'go-langserver',
+          \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+          \ 'whitelist': ['go'],
+          \ })
+        autocmd FileType go setlocal omnifunc=lsp#complete
+      augroup END
+    endif
+    
+    set completeopt-=preview
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+    inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ asyncomplete#force_refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+[[plugins]]
+repo = 'natebosch/vim-lsc'

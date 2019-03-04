@@ -1,0 +1,207 @@
+## Required:
+[[plugins]]  
+repo = 'Shougo/dein.vim'
+######################################################################
+## file exploring
+######################################################################
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+    nmap <C-f> :CtrlPLine<CR>
+    if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+          set grepprg=rg\ --color=never
+          let g:ctrlp_use_caching=0
+          let g:ctrlp_user_command='rg %s --files --color==never --glob ""'
+          "let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+    endif
+'''
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+    nmap <C-n> :NERDTreeFocusToggle<CR>
+    "nere tree----------------------------------------
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " 起動時にディレクトリならNERDTree、ファイルならファイルにフォーカスをあてる
+    let g:nerdtree_tabs_smart_startup_focus=1
+    " 新規タブを開いた時にもNERDTreeを表示する
+    let g:nerdtree_tabs_open_on_new_tab=1
+    " 不可視ファイルを表示する
+    let g:NERDTreeShowHidden = 1
+    let g:NERDTreeDirArrows = 1
+    "vim-devicons(require nerd fonts)----------------------------------------
+    let NERDTreeWinSize=22
+    let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+    let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+    " vim-devicons
+    let g:webdevicons_conceal_nerdtree_brackets = 1
+    let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+    " dir-icons
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:DevIconsEnableFoldersOpenClose = 1
+'''
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+######################################################################
+# grep
+######################################################################
+[[plugins]]
+repo = 'vim-scripts/grep.vim'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+hook_add = '''
+    nmap <C-l> :Lines<CR>
+'''
+[[plugins]]
+repo = 'jremmen/vim-ripgrep'
+hook_add = '''
+    nmap <F7> :Rg<CR>
+    nmap <C-h> :Rgrep<CR>
+    "grep.vim
+    if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+          let g:Fgrep_Path='/usr/local/bin/rg'
+          let g:Grep_Path='/usr/local/bin/rg'
+          set wildignore+=*/.git/*,*/tmp/*,*.swp
+    endif
+    nmap <C-g> :FlyGrepLike<CR>
+    command! -bang -nargs=* FlyGrepLike
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+'''
+
+######################################################################
+# tagbar
+######################################################################
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_add = '''
+    nmap <F8> :TagbarOpen j<CR>
+    " gotags
+    let g:tagbar_type_go = {
+    	\ 'ctagstype' : 'go',
+    	\ 'kinds'     : [
+    		\ 'p:package',
+    		\ 'i:imports:1',
+    		\ 'c:constants',
+    		\ 'v:variables',
+    		\ 't:types',
+    		\ 'n:interfaces',
+    		\ 'w:fields',
+    		\ 'e:embedded',
+    		\ 'm:methods',
+    		\ 'r:constructor',
+    		\ 'f:functions'
+    	\ ],
+    	\ 'sro' : '.',
+    	\ 'kind2scope' : {
+    		\ 't' : 'ctype',
+    		\ 'n' : 'ntype'
+    	\ },
+    	\ 'scope2kind' : {
+    		\ 'ctype' : 't',
+    		\ 'ntype' : 'n'
+    	\ },
+    	\ 'ctagsbin'  : 'gotags',
+    	\ 'ctagsargs' : '-sort -silent'
+    \ }
+    let g:tagbar_type_javascript = {
+        \ 'ctagstype' : 'javascript',
+        \ 'kinds'     : [
+            \ 'c:classes:0:1',
+            \ 'o:object:0:0',
+            \ 'f:functions:0:1',
+            \ 'm:methods:0:1',
+            \ 'p:properties:0:0',
+            \ 'v:global variables:0:0',
+            \ 'r:variables:0:0',
+        \ ],
+    \ }
+'''
+
+######################################################################
+# imporve editing(icon, theme, highlight etc...)
+######################################################################
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
+[[plugins]]
+repo = 'andymass/vim-matchup'
+hook_add = '''
+    let g:loaded_matchit = 1
+'''
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_powerline_fonts = 1
+'''
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+hook_add = '''
+    " highlightedyank
+    let g:highlightedyank_highlight_duration = 1000
+'''
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['Shougo/context_filetype.vim']
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+hooks_add ='''
+    if !exists('g:context_filetype#filetypes')
+        let g:context_filetype#filetypes = {}
+    endif
+'''
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hooks_add ='''
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+  let g:deoplete#enable_at_startup = 1
+'''
+######################################################################
+## snippet
+######################################################################
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+hook_add = '''
+    " Enable snipMate compatibility feature.
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    "set snippet file dir
+    let g:neosnippet#snippets_directory='~/.vim/dein/neosnippet-snippets/neosnippets/,~/.vim/snippets'
+    " Plugin key-mappings.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+    " SuperTab like snippets behavior.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <expr><TAB>
+     \ pumvisible() ? "\<C-n>" :
+     \ neosnippet#expandable_or_jumpable() ?
+     \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " Define dictionary.	
+    let g:neocomplcache_dictionary_filetype_lists = {	
+        \ 'default' : ''	
+        \ }
+    "neco----------------------------------------
+    let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
+    let g:neocomplcache_enable_at_startup = 1 " Use neocomplcache.	" highlightedyank
+    let g:neocomplcache_enable_smart_case = 1 " Use smartcase.	let g:highlightedyank_highlight_duration = 1000
+    let g:neocomplcache_min_syntax_length = 3 " Set minimum syntax keyword length.	" vim-matchup
+    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+    let g:loaded_matchit = 1
+'''
