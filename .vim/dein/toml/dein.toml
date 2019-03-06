@@ -126,8 +126,6 @@ hook_add = '''
 # imporve editing(icon, theme, highlight etc...)
 ######################################################################
 [[plugins]]
-repo = 'sheerun/vim-polyglot'
-[[plugins]]
 repo = 'andymass/vim-matchup'
 hook_add = '''
     let g:loaded_matchit = 1
@@ -158,16 +156,14 @@ hooks_add ='''
     endif
 '''
 [[plugins]]
-repo = 'Yggdroot/indentLine'
-[[plugins]]
 repo = 'Shougo/deoplete.nvim'
-hooks_add ='''
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
+hook_add = '''
   let g:deoplete#enable_at_startup = 1
 '''
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
 ######################################################################
 ## snippet
 ######################################################################
@@ -193,15 +189,94 @@ hook_add = '''
      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    " Define dictionary.	
-    let g:neocomplcache_dictionary_filetype_lists = {	
-        \ 'default' : ''	
-        \ }
-    "neco----------------------------------------
     let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
-    let g:neocomplcache_enable_at_startup = 1 " Use neocomplcache.	" highlightedyank
-    let g:neocomplcache_enable_smart_case = 1 " Use smartcase.	let g:highlightedyank_highlight_duration = 1000
-    let g:neocomplcache_min_syntax_length = 3 " Set minimum syntax keyword length.	" vim-matchup
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
     let g:loaded_matchit = 1
+'''
+
+######################################################################
+## syntax check
+######################################################################
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+    " 保存時のみ実行する
+    let g:ale_lint_on_text_changed = 1
+    " 表示に関する設定
+    let g:ale_sign_error = ''
+    let g:ale_sign_warning = ''
+    let g:airline#extensions#ale#open_lnum_symbol = '('
+    let g:airline#extensions#ale#close_lnum_symbol = ')'
+    let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+    let g:ale_lint_delay = 0
+    highlight link ALEErrorSign Tag
+    highlight link ALEWarningSign StorageClass
+    " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
+    "let g:ale_linters = {
+    "\   'go': ['gb build', 'go vet', 'golint'],
+    "\   'javascript': ['eslint'],
+    "\}
+    " Fix files with prettier, and then ESLint.
+    "let g:ale_fixers = {
+    "\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    "\   'javascript': ['prettier', 'eslint'],
+    "\}
+    " Equivalent to the above.
+    "let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+    " Set this variable to 1 to fix files when you save them.
+    "let g:ale_fix_on_save = 1
+'''
+
+#######################################################################
+### for vim lsp 
+#######################################################################
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  let g:lsp_async_completion = 1
+  let g:lsp_diagnostics_enabled = 0
+'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_remove_duplicates = 1
+  let g:asyncomplete_smart_completion = 1
+  imap <c-n> <Plug>(asyncomplete_force_refresh)
+  let g:lsp_async_completion = 1
+  let g:lsp_diagnostics_enabled = 0
+  let g:asyncomplete_auto_popup = 0
+  let g:asyncomplete_remove_duplicates = 1
+  let g:asyncomplete_smart_completion = 1
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  call dein#add('natebosch/vim-lsc')
+  if executable('go-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+        \ 'whitelist': ['go'],
+        \ })
+  endif
+  set completeopt-=preview
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+  function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ asyncomplete#force_refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+[[plugins]]
+repo = 'natebosch/vim-lsc'
+hook_add = '''
 '''
