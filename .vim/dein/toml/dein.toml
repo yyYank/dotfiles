@@ -246,6 +246,7 @@ hook_add = '''
   let g:asyncomplete_remove_duplicates = 1
   let g:asyncomplete_smart_completion = 1
   imap <c-n> <Plug>(asyncomplete_force_refresh)
+  imap <c-x> <Plug>(asyncomplete_force_refresh)
   let g:lsp_async_completion = 1
   let g:lsp_diagnostics_enabled = 0
   let g:asyncomplete_auto_popup = 0
