@@ -7,13 +7,17 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = '''
-    nmap <C-f> :CtrlPLine<CR>
     if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
           set grepprg=rg\ --color=never
           let g:ctrlp_use_caching=0
           let g:ctrlp_user_command='rg %s --files --color==never --glob ""'
           "let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
     endif
+'''
+[[plugins]]
+repo = 'tacahiroy/ctrlp-funky'
+hook_add = '''
+    nmap <C-f> :CtrlPFunky<CR>
 '''
 [[plugins]]
 repo = 'scrooloose/nerdtree'
@@ -229,7 +233,7 @@ hook_add = '''
 '''
 
 #######################################################################
-### for vim lsp 
+### for vim lsp
 #######################################################################
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -254,10 +258,17 @@ hook_add = '''
   let g:asyncomplete_smart_completion = 1
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   call dein#add('natebosch/vim-lsc')
-  if executable('go-langserver')
+  "if executable('go-langserver')
+  "  au User lsp_setup call lsp#register_server({
+  "      \ 'name': 'go-langserver',
+  "      \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+  "      \ 'whitelist': ['go'],
+  "      \ })
+  "endif
+  if executable('gopls')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
         \ 'whitelist': ['go'],
         \ })
   endif
@@ -281,3 +292,4 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 repo = 'natebosch/vim-lsc'
 hook_add = '''
 '''
+

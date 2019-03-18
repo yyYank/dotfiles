@@ -15,6 +15,13 @@ repo = 'mattn/vim-terminal'
 ######################################################################
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    let g:gitgutter_highlight_lines = 1
+    let g:gitgutter_enabled = 1 
+    let g:gitgutter_async = 1
+    nmap <silent> <S-k> :GitGutterEnable<CR>:GitGutterNextHunk<CR>
+    nmap <silent> <S-j> :GitGutterEnable<CR>:GitGutterPrevHunk<CR>
+'''
 #[[plugins]]
 #"call dein#add('tpope/vim-fugitive')
 #[[plugins]]
@@ -25,15 +32,23 @@ repo = 'airblade/vim-gitgutter'
 [[plugins]]
 repo = 'fatih/vim-go'
 hook_add = '''
-    autocmd FileType go nmap <leader>b  <Plug>(go-build)
-    autocmd FileType go nmap <leader>t  <Plug>(go-test)
+    autocmd FileType go nmap <leader>gb  <Plug>(go-build)
+    autocmd FileType go nmap <leader>gt  <Plug>(go-test)
+    autocmd FileType go nmap <leader>fs  <esc>:GoFillStruct<CR>
+    autocmd FileType go imap <leader>fs <esc>:GoFillStruct<CR>
+    autocmd FileType go nmap <leader>k  <esc>:GoKeyify<CR>
+    autocmd FileType go imap <leader>k  <esc>:GoKeyify<CR>
+    autocmd FileType go nmap <leader>at  <esc>:GoAddTags<CR>
+    autocmd FileType go nmap <leader>rt  <esc>:GoRemoveTags<CR>
+    autocmd FileType go nmap <leader>t  <esc>:GoAlternate<CR>
+    autocmd FileType go nmap <leader>rn  <esc>:GoRename<CR>
     nmap <C-i> :GoImports<CR>
     let g:go_gocode_propose_source = 0
 '''
 on_ft = 'go'
 [[plugins]]
 repo = 'vim-jp/vim-go-extra'
-# on_ft = 'go'
+on_ft = 'go'
 # [[plugins]]
 # repo = 'zchee/deoplete-go'
 # on_ft = 'go'
