@@ -139,8 +139,16 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
+    nnoremap <leader>p :bp<CR>
+    nnoremap <leader>n :bn<CR>
+    nnoremap <leader>d :bd <C-a> 
     let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
 '''
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+[[plugins]]
+repo = 'edkolev/tmuxline.vim'
 [[plugins]]
 repo = 'Townk/vim-autoclose'
 [[plugins]]
@@ -149,6 +157,8 @@ hook_add = '''
     " highlightedyank
     let g:highlightedyank_highlight_duration = 1000
 '''
+[[plugins]]
+repo = 'mhinz/vim-signify'
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['Shougo/context_filetype.vim']
@@ -168,6 +178,8 @@ hook_add = '''
 repo = 'roxma/nvim-yarp'
 [[plugins]]
 repo = 'roxma/vim-hug-neovim-rpc'
+[[plugins]]
+repo = 'Shougo/neco-syntax'
 ######################################################################
 ## snippet
 ######################################################################
@@ -272,6 +284,28 @@ hook_add = '''
         \ 'whitelist': ['go'],
         \ })
   endif
+  if executable('css-languageserver')
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'css-languageserver',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+          \ 'whitelist': ['css', 'less', 'sass'],
+          \ })
+  endif
+  " if executable('html-languageserver')
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'html-languageserver',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+  "         \ 'whitelist': ['html'],
+  "         \ })
+  " endif
+  " if executable('typescript-language-server')
+  "     au User lsp_setup call lsp#register_server({
+  "       \ 'name': 'javascript support using typescript-language-server',
+  "       \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+  "       \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
+  "       \ 'whitelist': ['javascript', 'javascript.jsx'],
+  "       \ })
+  " endif
   set completeopt-=preview
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -291,5 +325,19 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 [[plugins]]
 repo = 'natebosch/vim-lsc'
 hook_add = '''
+'''
+
+[[plugins]]
+repo = 'fuenor/qfixhowm'
+hook_add = '''
+"QFixHowmキーマップ
+let QFixHowm_Key = 'g'
+
+"howm_dirはファイルを保存したいディレクトリを設定。
+let howm_dir             = '~/memo'
+let howm_filename        = '%Y-%m-%d.md'
+let howm_fileencoding    = 'utf-8'
+let howm_fileformat      = 'unix'
+let QFixHowm_DiaryFile = '%Y-%m-%d.md'
 '''
 

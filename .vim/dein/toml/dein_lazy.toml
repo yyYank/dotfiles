@@ -16,11 +16,9 @@ repo = 'mattn/vim-terminal'
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
-    let g:gitgutter_highlight_lines = 1
+    let g:gitgutter_highlight_lines = 0
     let g:gitgutter_enabled = 1 
     let g:gitgutter_async = 1
-    nmap <silent> <S-k> :GitGutterEnable<CR>:GitGutterNextHunk<CR>
-    nmap <silent> <S-j> :GitGutterEnable<CR>:GitGutterPrevHunk<CR>
 '''
 #[[plugins]]
 #"call dein#add('tpope/vim-fugitive')
@@ -42,7 +40,7 @@ hook_add = '''
     autocmd FileType go nmap <leader>rt  <esc>:GoRemoveTags<CR>
     autocmd FileType go nmap <leader>t  <esc>:GoAlternate<CR>
     autocmd FileType go nmap <leader>rn  <esc>:GoRename<CR>
-    nmap <C-i> :GoImports<CR>
+    autocmd FileType go nmap <leader>i  <esc> :GoImports<CR>
     let g:go_gocode_propose_source = 0
 '''
 on_ft = 'go'
