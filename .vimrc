@@ -14,13 +14,11 @@ set rtp+=~/.fzf
 " mac の呪い
 set backspace=indent,eol,start
 syntax on
-" colorscheme vimbrains "Color Scheme
-" Command key mapping------------------------
-nnoremap ; :
-nmap <C-o> :botright copen<CR>
+" key mapping------------------------
 " カーソルのハイライト設定
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=237
+hi CursorLineNr term=bold cterm=NONE ctermfg=228 ctermbg=237
 " モードごとのカーソル設定
 if has('vim_starting')
     " 挿入モード時に非点滅の縦棒タイプのカーソル
@@ -33,17 +31,25 @@ endif
 " insertモードを抜けたらpopupは閉じる
 autocmd InsertLeave * :pclose
 " insertモードに入ったらカーソルハイライトクリア
-autocmd TextChangedI * hi clear CursorLine
+autocmd InsertEnter * hi clear CursorLine
 " insertモードを抜けたらカーソルハイライト
 autocmd InsertLeave * hi CursorLine term=bold cterm=bold ctermbg=237
 autocmd FileType qf wincmd J
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+let mapleader = "\<Space>"
+nnoremap ; :
+nmap <C-o> :botright copen<CR>
+" split系
+nnoremap <leader>vsp :vsplit<CR>
+nnoremap <leader>sp :split<CR>
+nnoremap <leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-let mapleader = "\<Space>"
- 
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
