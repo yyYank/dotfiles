@@ -83,7 +83,7 @@ hook_add = '''
 [[plugins]]
 repo = 'majutsushi/tagbar'
 hook_add = '''
-    autocmd FileType * nested :call tagbar#autoopen(0)
+    autocmd BufEnter * nested :call tagbar#autoopen(0)
     nmap <F8> :TagbarOpen j<CR>
     " gotags
     let g:tagbar_type_go = {
@@ -142,7 +142,7 @@ repo = 'vim-airline/vim-airline'
 hook_add = '''
     nnoremap <leader>p :bp<CR>
     nnoremap <leader>n :bn<CR>
-    nnoremap <leader>d :bd <C-a> 
+    nnoremap <leader>d :bd<CR> 
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
 '''
@@ -179,6 +179,21 @@ repo = 'roxma/nvim-yarp'
 repo = 'roxma/vim-hug-neovim-rpc'
 [[plugins]]
 repo = 'Shougo/neco-syntax'
+######################################################################
+# colors
+######################################################################
+# vimbrains
+[[plugins]]
+repo = 'sherifkandeel/vim-colors'
+# potato
+[[plugins]]
+repo = 'benburrill/potato-colors'
+# visualstudiodark
+[[plugins]]
+repo = 'Heorhiy/VisualStudioDark.vim'
+# color awesome
+[[plugins]]
+repo = 'rafi/awesome-vim-colorschemes'
 ######################################################################
 ## snippet
 ######################################################################
@@ -252,6 +267,9 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
+  nnoremap <leader>ph :LspHover<CR>
+  nnoremap <leader>pc :pclose<CR>
+  nnoremap <leader>pd :LspDefinition<CR>
   let g:lsp_async_completion = 1
   let g:lsp_diagnostics_enabled = 0
 '''
@@ -326,18 +344,3 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 repo = 'natebosch/vim-lsc'
 hook_add = '''
 '''
-
-[[plugins]]
-repo = 'fuenor/qfixhowm'
-hook_add = '''
-"QFixHowmキーマップ
-let QFixHowm_Key = 'g'
-
-"howm_dirはファイルを保存したいディレクトリを設定。
-let howm_dir             = '~/memo'
-let howm_filename        = '%Y-%m-%d.md'
-let howm_fileencoding    = 'utf-8'
-let howm_fileformat      = 'unix'
-let QFixHowm_DiaryFile = '%Y-%m-%d.md'
-'''
-
