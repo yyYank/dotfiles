@@ -140,9 +140,6 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
-    nnoremap <leader>p :bp<CR>
-    nnoremap <leader>n :bn<CR>
-    nnoremap <leader>d :bd<CR> 
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
 '''
