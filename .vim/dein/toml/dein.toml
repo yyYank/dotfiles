@@ -219,7 +219,6 @@ hook_add = '''
     let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
     let g:loaded_matchit = 1
 '''
-
 ######################################################################
 ## syntax check
 ######################################################################
@@ -234,26 +233,16 @@ hook_add = '''
     let g:airline#extensions#ale#open_lnum_symbol = '('
     let g:airline#extensions#ale#close_lnum_symbol = ')'
     let g:ale_echo_msg_format = '[%linter%]%code: %%s'
-    let g:ale_lint_delay = 0
+    let g:ale_lint_delay = 50
     let g:ale_sign_column_always = 1
     highlight link ALEErrorSign Tag
     highlight link ALEWarningSign StorageClass
     " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
     nmap <silent> <C-k> <Plug>(ale_previous_wrap)
     nmap <silent> <C-j> <Plug>(ale_next_wrap)
-    "let g:ale_linters = {
-    "\   'go': ['gb build', 'go vet', 'golint'],
-    "\   'javascript': ['eslint'],
-    "\}
-    " Fix files with prettier, and then ESLint.
-    "let g:ale_fixers = {
-    "\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    "\   'javascript': ['prettier', 'eslint'],
-    "\}
-    " Equivalent to the above.
-    "let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-    " Set this variable to 1 to fix files when you save them.
-    "let g:ale_fix_on_save = 1
+    let g:ale_linters = {
+    \   'go': ['go vet', 'golint'],
+    \}
 '''
 
 #######################################################################
@@ -283,8 +272,6 @@ hook_add = '''
   let g:asyncomplete_auto_popup = 0
   let g:asyncomplete_remove_duplicates = 1
   let g:asyncomplete_smart_completion = 1
-  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
-  call dein#add('natebosch/vim-lsc')
   "if executable('go-langserver')
   "  au User lsp_setup call lsp#register_server({
   "      \ 'name': 'go-langserver',

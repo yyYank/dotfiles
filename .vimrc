@@ -11,6 +11,8 @@ setlocal iskeyword+=-
 set noundofile " .un~という謎ファイル要らない
 set backspace=indent,eol,start " mac の呪い
 set clipboard=unnamed,autoselect " clip board 
+set hlsearch " search highlight
+set incsearch " incremental search highlight
 " rtp ===================================================
 set rtp+=$GOROOT/misc/vim
 set rtp+=~/.fzf
@@ -28,10 +30,12 @@ if has('vim_starting')
     " 置換モード時に非点滅の下線タイプのカーソル
     let &t_SR .= "\e[4 q"
 endif
-" insertモードに入ったらカーソルハイライトクリア
+" insertモードに入ったらハイライトクリア
 autocmd InsertEnter * hi clear CursorLine
-" insertモードを抜けたらカーソルハイライト
+autocmd InsertEnter * set nohlsearch
+" insertモードを抜けたらハイライト
 autocmd InsertLeave * hi CursorLine term=bold cterm=bold ctermbg=237
+autocmd InsertLeave * set hlsearch
 " completion setting =====================================
 autocmd InsertLeave * :pclose
 autocmd FileType qf wincmd J

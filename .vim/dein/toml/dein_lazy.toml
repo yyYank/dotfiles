@@ -6,11 +6,6 @@
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
 ######################################################################
-## terminal
-######################################################################
-[[plugins]]
-repo = 'mattn/vim-terminal'
-######################################################################
 ## git
 ######################################################################
 [[plugins]]
@@ -36,6 +31,7 @@ repo = 'fatih/vim-go'
 hook_add = '''
     autocmd FileType go nmap <leader>gb  <Plug>(go-build)
     autocmd FileType go nmap <leader>gt  <Plug>(go-test)
+    autocmd FileType go nmap <leader>tf  <esc>:GoTestFunc<CR>
     autocmd FileType go nmap <leader>fs  <esc>:GoFillStruct<CR>
     autocmd FileType go imap <leader>fs <esc>:GoFillStruct<CR>
     autocmd FileType go nmap <leader>k  <esc>:GoKeyify<CR>
@@ -45,6 +41,7 @@ hook_add = '''
     autocmd FileType go nmap <leader>t  <esc>:GoAlternate<CR>
     autocmd FileType go nmap <leader>rn  <esc>:GoRename<CR>
     autocmd FileType go nmap <leader>i  <esc> :GoImports<CR>
+    let g:go_def_mode='gopls'
     let g:go_gocode_propose_source = 0
 '''
 on_ft = 'go'
