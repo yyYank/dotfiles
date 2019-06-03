@@ -1,10 +1,13 @@
 " indent setting ========================================
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set noautoindent
 set nosmartindent
 " general setting =======================================
+set wildmenu
+set wildmode=full
+set termwinsize=7x0
 set number " 行表示
 set showmatch " 括弧の対応づけ
 setlocal iskeyword+=-

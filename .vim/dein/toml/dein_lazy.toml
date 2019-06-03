@@ -24,6 +24,16 @@ hook_add = '''
 #[[plugins]]
 #"call dein#add('lambdalisue/gina.vim')
 ######################################################################
+## typescript
+######################################################################
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = 'typescript'
+hook_add = '''
+    autocmd FileType typescript :set makeprg=tsc
+'''
+
+######################################################################
 ## Go
 ######################################################################
 [[plugins]]

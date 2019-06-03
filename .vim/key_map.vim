@@ -19,3 +19,11 @@ nnoremap <leader>p :bp<CR>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>d :bd<CR> 
 nnoremap <leader><leader> :noh<CR> 
+nnoremap <leader>te :call TermOpen()<CR>
+function! TermOpen()
+    if empty(term_list())
+        execute "belowright term"
+    else
+        call win_gotoid(win_findbuf(term_list()[0])[0])
+    endif
+endfunction
