@@ -33,6 +33,10 @@ hook_add = '''
     autocmd FileType typescript :set makeprg=tsc
 '''
 
+[[plugins]]
+repo = 'idbrii/vim-tagimposter'
+hook_add = '''
+'''
 ######################################################################
 ## Go
 ######################################################################

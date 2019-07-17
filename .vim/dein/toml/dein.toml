@@ -1,6 +1,8 @@
 ## Required:
 [[plugins]]  
 repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'udalov/kotlin-vim'
 ######################################################################
 ## file exploring
 ######################################################################
@@ -124,6 +126,24 @@ hook_add = '''
             \ 'r:variables:0:0',
         \ ],
     \ }
+    let g:tagbar_type_typescript = {                                                  
+      \ 'ctagsbin' : 'tstags',                                                        
+      \ 'ctagsargs' : '-f-',                                                           
+      \ 'kinds': [                                                                     
+        \ 'e:enums:0:1',                                                               
+        \ 'f:function:0:1',                                                            
+        \ 't:typealias:0:1',                                                           
+        \ 'M:Module:0:1',                                                              
+        \ 'I:import:0:1',                                                              
+        \ 'i:interface:0:1',                                                           
+        \ 'C:class:0:1',                                                               
+        \ 'm:method:0:1',                                                              
+        \ 'p:property:0:1',                                                            
+        \ 'v:variable:0:1',                                                            
+        \ 'c:const:0:1',                                                              
+      \ ],                                                                            
+      \ 'sort' : 0                                                                    
+    \ } 
 '''
 
 ######################################################################
@@ -262,7 +282,8 @@ repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
   nnoremap <leader>ph :LspHover<CR>
   nnoremap <leader>pc :pclose<CR>
-  nnoremap <leader>pd :LspDefinition<CR>
+  nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  autocmd FileType typescript nnoremap <leader>d :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
   let g:lsp_async_completion = 1
   let g:lsp_diagnostics_enabled = 0
 '''
@@ -308,21 +329,11 @@ hook_add = '''
           \ 'whitelist': ['typescript'],
           \ })
   endif
-  " if executable('html-languageserver')
-  "     au User lsp_setup call lsp#register_server({
-  "         \ 'name': 'html-languageserver',
-  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-  "         \ 'whitelist': ['html'],
-  "         \ })
-  " endif
-  " if executable('typescript-language-server')
-  "     au User lsp_setup call lsp#register_server({
-  "       \ 'name': 'javascript support using typescript-language-server',
-  "       \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-  "       \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
-  "       \ 'whitelist': ['javascript', 'javascript.jsx'],
-  "       \ })
-  " endif
+  " au User lsp_setup call lsp#register_server({
+  "     \ 'name': 'kotlin-languageserver',
+  "     \ 'cmd': {server_info->[&shell, &shellcmdflag, '/Users/yy_yank/.ghq/github.com/fwcd/KotlinLanguageServer/server/build/install/server/bin/server --stdio']},
+  "     \ 'whitelist': ['kotlin'],
+  "     \ })
   set completeopt-=preview
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
