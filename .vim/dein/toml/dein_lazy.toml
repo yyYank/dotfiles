@@ -19,18 +19,22 @@ hook_add = '''
     let g:gitgutter_enabled = 1 
     let g:gitgutter_async = 1
 '''
-#[[plugins]]
-#"call dein#add('tpope/vim-fugitive')
-#[[plugins]]
-#"call dein#add('lambdalisue/gina.vim')
 ######################################################################
 ## typescript
 ######################################################################
+# [[plugins]]
+# repo = 'Quramy/tsuquyomi'
+# hook_add = '''
+# let g:tsuquyomi_disable_quickfix = 1
+# '''
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-on_ft = 'typescript'
+on_ft = ['typescript', 'typescriptreact']
 hook_add = '''
-    autocmd FileType typescript :set makeprg=tsc
+    autocmd BufNewFile,BufRead *.tsx :setfiletype typescript
+    let g:typescript_indent_disable = 1
+    let g:typescript_compiler_binary = ''
+    let g:typescript_compiler_options = ''
 '''
 
 [[plugins]]

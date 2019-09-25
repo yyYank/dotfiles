@@ -1,8 +1,6 @@
 ## Required:
 [[plugins]]  
 repo = 'Shougo/dein.vim'
-[[plugins]]
-repo = 'udalov/kotlin-vim'
 ######################################################################
 ## file exploring
 ######################################################################
@@ -84,7 +82,7 @@ hook_add = '''
 [[plugins]]
 repo = 'majutsushi/tagbar'
 hook_add = '''
-    autocmd BufEnter * nested :call tagbar#autoopen(0)
+    " autocmd BufEnter * nested :call tagbar#autoopen(0)
     nmap <F8> :TagbarOpen j<CR>
     " gotags
     let g:tagbar_type_go = {
@@ -150,6 +148,16 @@ hook_add = '''
 # imporve editing(icon, theme, highlight etc...)
 ######################################################################
 [[plugins]]
+repo = 'mattn/emmet-vim'
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
+hook_add ='''
+    let g:sonictemplate_vim_template_dir = [
+    \ '$HOME/.vim/dein/repos/github.com/mattn/sonictemplate-vim/template',
+    \ '$HOME/.vim/sonic/template/'
+    \]
+'''
+[[plugins]]
 repo = 'andymass/vim-matchup'
 hook_add = '''
     let g:loaded_matchit = 1
@@ -167,8 +175,6 @@ repo = 'vim-airline/vim-airline-themes'
 [[plugins]]
 repo = 'edkolev/tmuxline.vim'
 [[plugins]]
-repo = 'Townk/vim-autoclose'
-[[plugins]]
 repo = 'machakann/vim-highlightedyank'
 hook_add = '''
     " highlightedyank
@@ -184,17 +190,7 @@ hooks_add ='''
         let g:context_filetype#filetypes = {}
     endif
 '''
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = '''
-  let g:deoplete#enable_at_startup = 1
-'''
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-[[plugins]]
-repo = 'Shougo/neco-syntax'
+
 ######################################################################
 # colors
 ######################################################################
@@ -238,40 +234,6 @@ hook_add = '''
     let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
     let g:loaded_matchit = 1
 '''
-######################################################################
-## syntax check
-######################################################################
- [[plugins]]
-repo = 'w0rp/ale'
-hook_add = '''
-    " 保存時のみ実行する
-    let g:ale_lint_on_text_changed = 1
-    " 表示に関する設定
-    let g:ale_sign_error = ''
-    let g:ale_sign_warning = ''
-    let g:airline#extensions#ale#open_lnum_symbol = '('
-    let g:airline#extensions#ale#close_lnum_symbol = ')'
-    let g:ale_echo_msg_format = '[%linter%]%code: %%s'
-    let g:ale_lint_delay = 50
-    let g:ale_sign_column_always = 1
-    highlight link ALEErrorSign Tag
-    highlight link ALEWarningSign StorageClass
-    " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
-    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-    nmap <silent> <C-j> <Plug>(ale_next_wrap)
-    let g:ale_linters = {
-    \   'go': ['go vet', 'golint'],
-    \}
-'''
-#[[plugins]]
-#repo = 'osyo-manga/vim-watchdogs'
-#[[plugins]]
-#repo = 'thinca/vim-quickrun'
-#[[plugins]]
-#repo = 'Shougo/vimproc.vim'
-#[[plugins]]
-#repo = 'osyo-manga/shabadou.vim'
-
 #######################################################################
 ### for vim lsp
 #######################################################################
@@ -282,22 +244,34 @@ repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
   nnoremap <leader>ph :LspHover<CR>
   nnoremap <leader>pc :pclose<CR>
-  nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
-  autocmd FileType typescript nnoremap <leader>d :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
-  let g:lsp_async_completion = 1
-  let g:lsp_diagnostics_enabled = 0
+  autocmd FileType go nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  autocmd FileType typescript nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  autocmd FileType typescriptreact nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
 '''
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 hook_add = '''
-  let g:asyncomplete_auto_popup = 1
-  let g:asyncomplete_remove_duplicates = 1
-  let g:asyncomplete_smart_completion = 1
   imap <c-n> <Plug>(asyncomplete_force_refresh)
   imap <c-x> <Plug>(asyncomplete_force_refresh)
-  let g:lsp_async_completion = 1
+  imap <c-p> <Plug>(asyncomplete_force_refresh)
+  let g:lsp_signs_enabled = 1
+  let g:lsp_highlight_references_enabled = 1
+  let g:lsp_highlights_enabled = 1
   let g:lsp_diagnostics_enabled = 0
-  let g:asyncomplete_auto_popup = 0
+  let g:lsp_async_completion = 1
+  let g:lsp_auto_enable = 1
+  let g:lsp_preview_autoclose = 0
+  let g:lsp_preview_keep_focus = 0
+  let g:lsp_preview_doubletap = 0
+  let g:lsp_insert_text_enabled = 0
+  let g:lsp_text_edit_enabled = 0
+  let g:lsp_diagnostics_echo_cursor = 0
+  let g:lsp_virtual_text_enabled = 0
+  let g:lsp_textprop_enabled = 0
+  let g:lsp_signature_help_enabled = 0
+  let g:lsp_fold_enabled = 0
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_remove_duplicates = 1
   let g:asyncomplete_smart_completion = 1
   "if executable('go-langserver')
@@ -329,11 +303,11 @@ hook_add = '''
           \ 'whitelist': ['typescript'],
           \ })
   endif
-  " au User lsp_setup call lsp#register_server({
-  "     \ 'name': 'kotlin-languageserver',
-  "     \ 'cmd': {server_info->[&shell, &shellcmdflag, '/Users/yy_yank/.ghq/github.com/fwcd/KotlinLanguageServer/server/build/install/server/bin/server --stdio']},
-  "     \ 'whitelist': ['kotlin'],
-  "     \ })
+  au User lsp_setup call lsp#register_server({
+      \ 'name': 'kotlin-languageserver',
+      \ 'cmd': {server_info->[&shell, &shellcmdflag, '/Users/yy_yank/.ghq/github.com/fwcd/KotlinLanguageServer/server/build/install/server/bin/server --stdio']},
+      \ 'whitelist': ['kotlin'],
+      \ })
   set completeopt-=preview
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
