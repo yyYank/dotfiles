@@ -27,7 +27,7 @@ hook_add = '''
 # hook_add = '''
 # let g:tsuquyomi_disable_quickfix = 1
 # '''
-[[plugins]]
+# [[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = ['typescript', 'typescriptreact']
 hook_add = '''
@@ -72,8 +72,8 @@ on_ft = 'go'
 ######################################################################
 ## js
 ######################################################################
-[[plugins]]
-repo = 'jelera/vim-javascript-syntax'
+#[[plugins]]
+#repo = 'jelera/vim-javascript-syntax'
 [[plugins]]
 repo = 'mattn/jscomplete-vim'
 hook_add = '''
