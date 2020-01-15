@@ -153,8 +153,8 @@ repo = 'mattn/emmet-vim'
 repo = 'mattn/sonictemplate-vim'
 hook_add ='''
     let g:sonictemplate_vim_template_dir = [
-    \ '$HOME/.vim/dein/repos/github.com/mattn/sonictemplate-vim/template',
-    \ '$HOME/.vim/sonic/template/'
+    \ '~/.vim/dein/repos/github.com/mattn/sonictemplate-vim/template',
+    \ '~/.vim/sonic/template/'
     \]
 '''
 [[plugins]]
@@ -253,10 +253,18 @@ repo = 'prabirshrestha/async.vim'
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
   nnoremap <leader>ph :LspHover<CR>
+  nnoremap <leader>pn :LspNextDiagnostic<CR>
   nnoremap <leader>pc :pclose<CR>
   autocmd FileType go nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
   autocmd FileType typescript nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
   autocmd FileType typescriptreact nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  let g:lsp_signs_error = {'text': ' '}
+  let g:lsp_signs_warning = {'text': ' '}
+  let g:lsp_signs_hint = {'text': ' '}
+  let g:lsp_log_verbose = 0
+  " let g:lsp_log_file = expand('~/vim-lsp.log')
+  " for asyncomplete.vim log
+  " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 '''
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
@@ -275,7 +283,7 @@ hook_add = '''
   let g:lsp_preview_doubletap = 0
   let g:lsp_insert_text_enabled = 0
   let g:lsp_text_edit_enabled = 0
-  let g:lsp_diagnostics_echo_cursor = 0
+  let g:lsp_diagnostics_echo_cursor = 1
   let g:lsp_virtual_text_enabled = 0
   let g:lsp_textprop_enabled = 0
   let g:lsp_signature_help_enabled = 0
@@ -291,33 +299,28 @@ hook_add = '''
   "      \ 'whitelist': ['go'],
   "      \ })
   "endif
-  if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-  endif
-  if executable('css-languageserver')
-      au User lsp_setup call lsp#register_server({
-          \ 'name': 'css-languageserver',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-          \ 'whitelist': ['css', 'less', 'sass'],
-          \ })
-  endif
-  if executable('typescript-language-server')
-      au User lsp_setup call lsp#register_server({
-          \ 'name': 'typescript-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \ 'whitelist': ['typescript'],
-          \ })
-  endif
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'kotlin-languageserver',
-      \ 'cmd': {server_info->[&shell, &shellcmdflag, '/Users/yy_yank/.ghq/github.com/fwcd/KotlinLanguageServer/server/build/install/server/bin/server --stdio']},
-      \ 'whitelist': ['kotlin'],
-      \ })
+  " if executable('gopls')
+  "   au User lsp_setup call lsp#register_server({
+  "       \ 'name': 'gopls',
+  "       \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+  "       \ 'whitelist': ['go'],
+  "       \ })
+  " endif
+  " if executable('css-languageserver')
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'css-languageserver',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+  "         \ 'whitelist': ['css', 'less', 'sass'],
+  "         \ })
+  " endif
+  " if executable('typescript-language-server')
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'typescript-language-server',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+  "         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+  "         \ 'whitelist': ['typescript'],
+  "         \ })
+  " endif
   set completeopt-=preview
   inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -331,6 +334,11 @@ hook_add = '''
     \ <SID>check_back_space() ? "\<TAB>" :
     \ asyncomplete#force_refresh()
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+    let g:lsp_settings_servers_dir = '/Users/yy_yank/.vim/lsp/server'
 '''
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
@@ -410,3 +418,27 @@ let g:memolist_delimiter_yaml_start = "---"
 " last line string pattern of yaml front matter (default "- - -")
 let g:memolist_delimiter_yaml_end  = "---"
 '''
+
+######################################################################
+## git
+######################################################################
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    nnoremap <leader>gd :GitGutterDisable<CR>
+    nnoremap <leader>ge :GitGutterEnable<CR>
+    nnoremap <leader>gp :GitGutterPrevHunk<CR>
+    nnoremap <leader>gn :GitGutterNextHunk<CR>
+    let g:gitgutter_highlight_lines = 0
+    let g:gitgutter_enabled = 1 
+    let g:gitgutter_async = 1
+    let g:gitgutter_sign_added = '+'
+    let g:gitgutter_sign_modified = '~'
+    let g:gitgutter_sign_removed = '-'
+    let g:gitgutter_sign_removed_first_line ='>>'
+    let g:gitgutter_sign_modified_removed = '~'
+    let g:gitgutter_diff_args = '-w'
+'''
+
+[[plugins]]
+repo = "tpope/vim-fugitive"
