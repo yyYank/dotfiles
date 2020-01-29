@@ -1,8 +1,17 @@
+# brew install済みの想定
+if [ "$(which brew)" == "" ]; then
+    echo "brew not found"
+    exit 1
+fi
+
 # general
 brew install git
+# diff highlightを有効にする
+sudo ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight /usr/local/bin/diff-highlight
 brew install vim –with lua
 brew install tmux
 brew install fzf
+brew install ripgrep
 brew install tree
 brew install ghq
 brew tap caskroom/fonts
@@ -31,6 +40,7 @@ brew install mycli
 brew install go
 brew install python3
 # js
+brew install node
 brew install npm
 brew install yarn
 # docker
@@ -42,6 +52,7 @@ brew install docui
 # redis
 brew install redis
 
-# npm tool
+# npm install
 npm install gtop -g
 npm install -g spaceship-prompt
+sudo npm i -g typescript
