@@ -1,8 +1,11 @@
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
 source ~/.zsh/z/z.sh
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-completions/zsh-completions.plugin.zsh
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
 #export GOROOT=/usr/local/opt/go@1.11/libexec
 #export GOPATH=$HOME/go
 #export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
