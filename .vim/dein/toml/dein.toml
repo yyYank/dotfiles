@@ -44,6 +44,18 @@ hook_add = '''
 [[plugins]]
 repo = 'jistr/vim-nerdtree-tabs'
 ######################################################################
+# folding
+######################################################################
+[[plugins]]
+repo = 'wellle/context.vim'
+hook_add = '''
+    let g:context_enabled = 0
+    let g:context_add_mappings = 1
+    let g:context_add_autocmds = 1
+'''
+[[plugins]]
+repo = 'pseewald/vim-anyfold'
+######################################################################
 # grep
 ######################################################################
 [[plugins]]
@@ -255,7 +267,7 @@ hook_add = '''
   nnoremap <leader>ph :LspHover<CR>
   nnoremap <leader>pn :LspNextDiagnostic<CR>
   nnoremap <leader>pc :pclose<CR>
-  autocmd FileType go nnoremap <leader>pd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  autocmd FileType go nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
   autocmd FileType typescript nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
   autocmd FileType typescriptreact nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
   let g:lsp_signs_error = {'text': ' '}

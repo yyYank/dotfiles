@@ -40,8 +40,17 @@ hook_add = '''
     autocmd FileType go nmap <leader>t  <esc>:GoAlternate<CR>
     autocmd FileType go nmap <leader>rn  <esc>:GoRename<CR>
     autocmd FileType go nmap <leader>i  <esc> :GoImports<CR>
-    let g:go_def_mode='gopls'
+    let g:go_def_mapping_enabled = 0
+    let g:go_def_mode='godef'
+    let g:go_referrers_mode = 'guru'
     let g:go_gocode_propose_source = 0
+    let g:go_gopls_enabled = 0
+    let g:go_gopls_complete_unimported = 0
+    let g:go_gopls_deep_completion = 0
+    let g:go_gopls_fuzzy_matching = 0
+    let g:go_gopls_staticcheck = 0
+    let g:go_gopls_use_placeholders = 0
+    let g:go_diagnostics_enabled = 0
 '''
 on_ft = 'go'
 [[plugins]]
