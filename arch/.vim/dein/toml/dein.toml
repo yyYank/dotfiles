@@ -1,0 +1,456 @@
+## Required:
+[[plugins]]  
+repo = 'Shougo/dein.vim'
+######################################################################
+## file exploring
+######################################################################
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+    let g:ctrlp_map = ''
+    let g:ctrlp_cmd = ''
+'''
+[[plugins]]
+repo = 'tacahiroy/ctrlp-funky'
+hook_add = '''
+    nmap <C-f> :CtrlPFunky<CR>
+'''
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+    nmap <C-n> :NERDTreeFocusToggle<CR>
+    "nere tree----------------------------------------
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " 起動時にディレクトリならNERDTree、ファイルならファイルにフォーカスをあてる
+    let g:nerdtree_tabs_smart_startup_focus=1
+    " 新規タブを開いた時にもNERDTreeを表示する
+    let g:nerdtree_tabs_open_on_new_tab=1
+    " 不可視ファイルを表示する
+    let g:NERDTreeShowHidden = 1
+    let g:NERDTreeDirArrows = 1
+    "vim-devicons(require nerd fonts)----------------------------------------
+    let NERDTreeWinSize=22
+    let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+    let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+    " vim-devicons
+    let g:webdevicons_conceal_nerdtree_brackets = 1
+    let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+    " dir-icons
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:DevIconsEnableFoldersOpenClose = 1
+'''
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+######################################################################
+# folding
+######################################################################
+[[plugins]]
+repo = 'wellle/context.vim'
+hook_add = '''
+    let g:context_enabled = 0
+    let g:context_add_mappings = 1
+    let g:context_add_autocmds = 1
+'''
+[[plugins]]
+repo = 'pseewald/vim-anyfold'
+######################################################################
+# grep
+######################################################################
+[[plugins]]
+repo = 'vim-scripts/grep.vim'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+hook_add = '''
+    nmap <C-l> :Lines<CR>
+    let g:fzf_action = {
+      \ 'ctrl-t': 'tab new'}
+'''
+[[plugins]]
+repo = 'jremmen/vim-ripgrep'
+hook_add = '''
+    nmap <F7> :Rg<CR>
+    nmap <C-h> :Rgrep<CR>
+    "grep.vim
+    if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+          let g:Fgrep_Path='/usr/local/bin/rg'
+          let g:Grep_Path='/usr/local/bin/rg'
+          set wildignore+=*/.git/*,*/tmp/*,*.swp
+    endif
+    nmap <C-p> :Files<CR>
+    nmap <C-g> :FlyGrepLike<CR>
+    command! -bang -nargs=* FlyGrepLike
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+'''
+
+######################################################################
+# tagbar
+######################################################################
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_add = '''
+    " autocmd BufEnter * nested :call tagbar#autoopen(0)
+    nmap <F8> :TagbarOpen j<CR>
+    " gotags
+    let g:tagbar_type_go = {
+    	\ 'ctagstype' : 'go',
+    	\ 'kinds'     : [
+    		\ 'p:package',
+    		\ 'i:imports:1',
+    		\ 'c:constants',
+    		\ 'v:variables',
+    		\ 't:types',
+    		\ 'n:interfaces',
+    		\ 'w:fields',
+    		\ 'e:embedded',
+    		\ 'm:methods',
+    		\ 'r:constructor',
+    		\ 'f:functions'
+    	\ ],
+    	\ 'sro' : '.',
+    	\ 'kind2scope' : {
+    		\ 't' : 'ctype',
+    		\ 'n' : 'ntype'
+    	\ },
+    	\ 'scope2kind' : {
+    		\ 'ctype' : 't',
+    		\ 'ntype' : 'n'
+    	\ },
+    	\ 'ctagsbin'  : 'gotags',
+    	\ 'ctagsargs' : '-sort -silent'
+    \ }
+    let g:tagbar_type_javascript = {
+        \ 'ctagstype' : 'javascript',
+        \ 'kinds'     : [
+            \ 'c:classes:0:1',
+            \ 'o:object:0:0',
+            \ 'f:functions:0:1',
+            \ 'm:methods:0:1',
+            \ 'p:properties:0:0',
+            \ 'v:global variables:0:0',
+            \ 'r:variables:0:0',
+        \ ],
+    \ }
+    let g:tagbar_type_typescript = {                                                  
+      \ 'ctagsbin' : 'tstags',                                                        
+      \ 'ctagsargs' : '-f-',                                                           
+      \ 'kinds': [                                                                     
+        \ 'e:enums:0:1',                                                               
+        \ 'f:function:0:1',                                                            
+        \ 't:typealias:0:1',                                                           
+        \ 'M:Module:0:1',                                                              
+        \ 'I:import:0:1',                                                              
+        \ 'i:interface:0:1',                                                           
+        \ 'C:class:0:1',                                                               
+        \ 'm:method:0:1',                                                              
+        \ 'p:property:0:1',                                                            
+        \ 'v:variable:0:1',                                                            
+        \ 'c:const:0:1',                                                              
+      \ ],                                                                            
+      \ 'sort' : 0                                                                    
+    \ } 
+'''
+
+######################################################################
+# imporve editing(icon, theme, highlight etc...)
+######################################################################
+[[plugins]]
+repo = 'mattn/emmet-vim'
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
+hook_add ='''
+    let g:sonictemplate_vim_template_dir = [
+    \ '~/.vim/dein/repos/github.com/mattn/sonictemplate-vim/template',
+    \ '~/.vim/sonic/template/'
+    \]
+'''
+[[plugins]]
+repo = 'andymass/vim-matchup'
+hook_add = '''
+    let g:loaded_matchit = 1
+'''
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+'''
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+[[plugins]]
+repo = 'edkolev/tmuxline.vim'
+[[plugins]]
+repo = 'machakann/vim-highlightedyank'
+hook_add = '''
+    " highlightedyank
+    let g:highlightedyank_highlight_duration = 1000
+'''
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['Shougo/context_filetype.vim']
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+hooks_add ='''
+    if !exists('g:context_filetype#filetypes')
+        let g:context_filetype#filetypes = {}
+    endif
+'''
+
+######################################################################
+# colors
+######################################################################
+# vimbrains
+[[plugins]]
+repo = 'sherifkandeel/vim-colors'
+# potato
+[[plugins]]
+repo = 'benburrill/potato-colors'
+# visualstudiodark
+[[plugins]]
+repo = 'Heorhiy/VisualStudioDark.vim'
+# color awesome
+[[plugins]]
+repo = 'rafi/awesome-vim-colorschemes'
+######################################################################
+## snippet
+######################################################################
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# [[plugins]]
+# repo = 'roxma/nvim-yarp'
+# [[plugins]]
+# repo = 'roxma/vim-hug-neovim-rpc'
+# hook_add = '''
+#     let g:deoplete#enable_at_startup = 1
+# '''
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+hook_add = '''
+    " Enable snipMate compatibility feature.
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    "set snippet file dir
+    let g:neosnippet#snippets_directory='~/.vim/dein/neosnippet-snippets/neosnippets/,~/.vim/snippets'
+    " Plugin key-mappings.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+    " SuperTab like snippets behavior.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <expr><TAB>
+     \ pumvisible() ? "\<C-n>" :
+     \ neosnippet#expandable_or_jumpable() ?
+     \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
+    let g:loaded_matchit = 1
+'''
+
+#######################################################################
+### for vim lsp
+#######################################################################
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  nnoremap <leader>ph :LspHover<CR>
+  nnoremap <leader>pn :LspNextDiagnostic<CR>
+  nnoremap <leader>pc :pclose<CR>
+  autocmd FileType go nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  autocmd FileType typescript nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  autocmd FileType typescriptreact nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+  let g:lsp_signs_error = {'text': ' '}
+  let g:lsp_signs_warning = {'text': ' '}
+  let g:lsp_signs_hint = {'text': ' '}
+  let g:lsp_log_verbose = 0
+  " let g:lsp_log_file = expand('~/vim-lsp.log')
+  " for asyncomplete.vim log
+  " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+  imap <c-n> <Plug>(asyncomplete_force_refresh)
+  imap <c-x> <Plug>(asyncomplete_force_refresh)
+  imap <c-p> <Plug>(asyncomplete_force_refresh)
+  let g:lsp_signs_enabled = 1
+  let g:lsp_highlight_references_enabled = 1
+  let g:lsp_highlights_enabled = 1
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_async_completion = 1
+  let g:lsp_auto_enable = 1
+  let g:lsp_preview_autoclose = 0
+  let g:lsp_preview_keep_focus = 0
+  let g:lsp_preview_doubletap = 0
+  let g:lsp_insert_text_enabled = 0
+  let g:lsp_text_edit_enabled = 0
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_virtual_text_enabled = 0
+  let g:lsp_textprop_enabled = 0
+  let g:lsp_signature_help_enabled = 0
+  let g:lsp_fold_enabled = 0
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_completeopt = 1
+  let g:asyncomplete_remove_duplicates = 1
+  let g:asyncomplete_smart_completion = 1
+  "if executable('go-langserver')
+  "  au User lsp_setup call lsp#register_server({
+  "      \ 'name': 'go-langserver',
+  "      \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+  "      \ 'whitelist': ['go'],
+  "      \ })
+  "endif
+  " if executable('gopls')
+  "   au User lsp_setup call lsp#register_server({
+  "       \ 'name': 'gopls',
+  "       \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+  "       \ 'whitelist': ['go'],
+  "       \ })
+  " endif
+  " if executable('css-languageserver')
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'css-languageserver',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+  "         \ 'whitelist': ['css', 'less', 'sass'],
+  "         \ })
+  " endif
+  " if executable('typescript-language-server')
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'typescript-language-server',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+  "         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+  "         \ 'whitelist': ['typescript'],
+  "         \ })
+  " endif
+  set completeopt-=preview
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+  function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ asyncomplete#force_refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+    let g:lsp_settings_servers_dir = '/Users/yy_yank/.vim/lsp/server'
+'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+[[plugins]]
+repo = 'natebosch/vim-lsc'
+hook_add = '''
+'''
+# [[plugins]]
+# repo = 'thomasfaingnaert/vim-lsp-snippets'
+# hook_add = '''
+# '''
+# [[plugins]]
+# repo = 'thomasfaingnaert/vim-lsp-neosnippet'
+# hook_add = '''
+# '''
+[[plugins]]
+repo = 'glidenote/memolist.vim'
+hook_add = '''
+let g:memolist_path = "~/memo"
+" suffix type (default markdown)
+let g:memolist_memo_suffix = "markdown"
+let g:memolist_memo_suffix = "txt"
+
+" date format (default %Y-%m-%d %H:%M)
+let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+let g:memolist_memo_date = "epoch"
+let g:memolist_memo_date = "%D %T"
+
+" tags prompt (default 0)
+let g:memolist_prompt_tags = 1
+
+" categories prompt (default 0)
+let g:memolist_prompt_categories = 1
+
+" use qfixgrep (default 0)
+let g:memolist_qfixgrep = 1
+
+" use vimfiler (default 0)
+let g:memolist_vimfiler = 0
+
+" use fzf (default 0)
+let g:memolist_fzf = 1
+
+" remove filename prefix (default 0)
+let g:memolist_filename_prefix_none = 1
+
+" use unite (default 0)
+let g:memolist_unite = 0
+
+" use arbitrary unite source (default is 'file')
+let g:memolist_unite_source = "file_rec"
+
+" use arbitrary unite option (default is empty)
+let g:memolist_unite_option = "-auto-preview -start-insert"
+
+" use denite (default 0)
+let g:memolist_denite = 0
+
+" use arbitrary denite source (default is 'file_rec')
+let g:memolist_denite_source = "anything"
+
+" use arbitrary denite option (default is empty)
+let g:memolist_denite_option = "anything"
+
+" use various Ex commands (default '')
+let g:memolist_ex_cmd = 'CtrlP'
+let g:memolist_ex_cmd = 'NERDTree'
+let g:memolist_ex_cmd = 'Defx'
+
+" use delimiter of array in yaml front matter (default is ' ')
+let g:memolist_delimiter_yaml_array = ','
+
+" use when get items from yaml front matter
+" first line string pattern of yaml front matter (default "==========")
+let g:memolist_delimiter_yaml_start = "---"
+
+" last line string pattern of yaml front matter (default "- - -")
+let g:memolist_delimiter_yaml_end  = "---"
+'''
+
+######################################################################
+## git
+######################################################################
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    nnoremap <leader>gd :GitGutterDisable<CR>
+    nnoremap <leader>ge :GitGutterEnable<CR>
+    nnoremap <leader>gp :GitGutterPrevHunk<CR>
+    nnoremap <leader>gn :GitGutterNextHunk<CR>
+    let g:gitgutter_highlight_lines = 0
+    let g:gitgutter_enabled = 1 
+    let g:gitgutter_async = 1
+    let g:gitgutter_sign_added = '+'
+    let g:gitgutter_sign_modified = '~'
+    let g:gitgutter_sign_removed = '-'
+    let g:gitgutter_sign_removed_first_line ='>>'
+    let g:gitgutter_sign_modified_removed = '~'
+    let g:gitgutter_diff_args = '-w'
+'''
+
+[[plugins]]
+repo = "tpope/vim-fugitive"
