@@ -1,0 +1,2 @@
+curl -flo "Bitstream Vera Sans Mono Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/BitstreamVeraSansMono/Regular/complete/Bitstream%20Vera%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+curl -flo "Bitstream Vera Sans Mono Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/raw/patched-fonts/BitstreamVeraSansMono/Regular/complete/Bitstream%20Vera%20Sans%20Mono%20Nerd%20Font%20Complete.ttf
