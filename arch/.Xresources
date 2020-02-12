@@ -1,0 +1,16 @@
+xterm*termName: xterm-256color
+XTerm*VT100.translations: #override <Btn1Up>: select-end(CLIPBOARD)
+XTerm*locale : true
+XTerm*selectToClipboard : true
+XTerm*faceName:              Bitstream Vera Sans Mono Nerd Font Complete Mono:size=10:antialias=false
+XTerm*faceNameDoublesize:    Bitstream Vera Sans Mono Nerd Font Complete Mono 2M:size=10:antialias=false
+xterm*ximFont:               Bitstream Vera Sans Mono Nerd Font Complete Mono 2M:size=10:antialias=false
+xterm*font: 7x13
+XTerm*forcePackedFont : false
+XTerm*faceSize : 10
+XTerm*saveLines : 2000
+XTerm*cjkWidth : false
+XTerm*rightScrollBar : true
+XTerm*scrollBar : true
+XTerm*background : rgb:20/20/20
+XTerm*foreground : white 
