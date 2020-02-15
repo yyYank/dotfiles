@@ -2,8 +2,11 @@
 pacman  --needed -S git
 # diff highlightを有効にする
 # sudo ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight /usr/local/bin/diff-highlight
-pacman --needed -S vim –with lua
+# vimは自前でビルドしよう
+# pacman --needed -S vim –with lua
 pacman --needed -S tmux
+# clipboard copy
+pacman --needed -S xsel
 pacman --needed -S fzf
 pacman --needed -S ripgrep
 pacman --needed -S tree
