@@ -5,7 +5,7 @@ repo = 'Shougo/dein.vim'
 ## file exploring
 ######################################################################
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
+repo = 'kien/ctrlp.vim'
 hook_add = '''
     let g:ctrlp_map = ''
     let g:ctrlp_cmd = ''
@@ -72,20 +72,20 @@ repo = 'jremmen/vim-ripgrep'
 hook_add = '''
     nmap <F7> :Rg<CR>
     nmap <C-h> :Rgrep<CR>
-    "grep.vim
-    if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
-          let g:Fgrep_Path='/usr/local/bin/rg'
-          let g:Grep_Path='/usr/local/bin/rg'
-          set wildignore+=*/.git/*,*/tmp/*,*.swp
-    endif
     nmap <C-p> :Files<CR>
-    nmap <C-g> :FlyGrepLike<CR>
     command! -bang -nargs=* FlyGrepLike
       \ call fzf#vim#grep(
       \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
+    nmap <C-g> :FlyGrepLike<CR>
+    "grep.vim
+    if executable('rg') " require rg https://github.com/BurntSushi/ripgrep
+          let g:Fgrep_Path='/usr/local/bin/rg'
+          let g:Grep_Path='/usr/local/bin/rg'
+          set wildignore+=*/.git/*,*/tmp/*,*.swp
+    endif
 '''
 
 ######################################################################
