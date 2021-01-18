@@ -1,0 +1,28 @@
+set ignorecase
+set hlsearch
+set incsearch
+nnoremap <C-p> :<C-u>action GotoFile<CR>
+nnoremap <C-g> :<C-u>action FindInPath<CR>
+nnoremap <C-a> :<C-u>action GotoAction<CR>
+nnoremap <C-f> :<C-u>action ReformatCode<CR>
+nnoremap <C-o> :<C-u>action OpenProjectWindows<CR>
+set clipboard=unnamed,autoselect " clip board
+
+" keymap
+let mapleader = "\<Space>"
+nnoremap ; :
+" split系
+nnoremap <leader>vsp :vsplit<CR>
+nnoremap <leader>sp :split<CR>
+nnoremap <leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+" command shortcut
+nnoremap <leader>ww :w<CR>
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>aq :qa<CR>
+nnoremap <leader>fq :q!<CR>
+nnoremap <leader>afq :qa!<CR>
+nnoremap <leader><leader> :noh<CR>
