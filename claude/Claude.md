@@ -6,7 +6,7 @@ Claude Code がグローバルに参照する設定・コンテキストを定�
 ## 使い方
 
 ```bash
-cp /path/to/dotfiles/claude/Claude.md ~/.claude/CLAUDE.md
+cp /path/to/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
 ```
 
 ## Tech Stack

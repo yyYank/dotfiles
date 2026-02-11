@@ -1,3 +1,8 @@
+---
+name: review-backend
+description: バックエンドコードのレビュー。アーキテクチャ、セキュリティ、パフォーマンスの観点を重視。
+---
+
 # Backend Code Review
 
 バックエンドコードのレビューを行います。

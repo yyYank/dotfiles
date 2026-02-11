@@ -1,3 +1,8 @@
+---
+name: review-infra
+description: インフラ構成・IaCコードのレビュー。セキュリティ、可用性、コスト最適化の観点を重視。
+---
+
 # Infrastructure Review
 
 インフラ構成・IaCコードのレビューを行います。

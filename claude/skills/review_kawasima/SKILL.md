@@ -1,3 +1,8 @@
+---
+name: review-kawasima
+description: kawasimaスタイルでコードレビュー。アーキテクチャ、設計原則、ドメインモデリングの観点を重視。
+---
+
 # kawasima流コードレビュー
 
 川島さん（@kawasima）のレビュースタイルを参考にしたコードレビューを行います。

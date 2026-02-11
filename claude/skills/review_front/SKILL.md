@@ -1,3 +1,8 @@
+---
+name: review-front
+description: フロントエンドコードのレビュー。コンポーネント設計、パフォーマンス、アクセシビリティの観点を重視。
+---
+
 # Frontend Code Review
 
 フロントエンドコードのレビューを行います。

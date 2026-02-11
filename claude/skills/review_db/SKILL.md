@@ -1,3 +1,8 @@
+---
+name: review-db
+description: データベース設計・SQLクエリのレビュー。スキーマ設計、インデックス、パフォーマンスの観点を重視。
+---
+
 # Database Review
 
 データベース設計・SQLクエリのレビューを行います。
