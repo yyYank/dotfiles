@@ -1,6 +1,7 @@
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/opt/spaceship/spaceship.zsh
 # source /usr/local/share/zsh-completions/zsh-completions.plugin.zsh
 # source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -36,7 +37,7 @@ alias -g co='branch|fzf|xargs git checkout'
 alias -g ghql='cd $(ghq list --p|fzf) && basename `pwd` | xargs tmux rename-window'
 autoload -Uz compinit
 compinit
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+#export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
 # End of lines added by compinstall
 
@@ -49,4 +50,13 @@ export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export SDKMAN_DIR="/Users/yy_yank/.sdkman"
 [[ -s "/Users/yy_yank/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/yy_yank/.sdkman/bin/sdkman-init.sh"
 
+eval "$(mise activate zsh)"
 
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/yy_yank/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+export PATH="$HOME/.rd/bin:$PATH"
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
