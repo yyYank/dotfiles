@@ -1,17 +1,15 @@
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/opt/spaceship/spaceship.zsh
+source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/opt/spaceship/spaceship.zsh
 # source /usr/local/share/zsh-completions/zsh-completions.plugin.zsh
 # source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
-#export GOROOT=/usr/local/opt/go@1.11/libexec
 export GOPATH=$HOME/go
-#export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PGDATA=/usr/local/var/postgres
 export LANG=ja_JP.UTF-8
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($HOMEBREW_PREFIX/share/zsh-completions $fpath)
 autoload -U compinit
 compinit -u
 
