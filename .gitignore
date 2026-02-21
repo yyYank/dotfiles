@@ -1,3 +1,7 @@
+config.identity
+identity.*
+*.identity
+
 */.vim/dein/.cache
 */.vim/dein/repos
 */.vim/.netrwhist
