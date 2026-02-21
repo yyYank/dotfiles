@@ -3,3 +3,6 @@
 
 [ghq]
 	root = ~/.ghq
+
+[push]
+	default = current

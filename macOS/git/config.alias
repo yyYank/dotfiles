@@ -13,3 +13,6 @@
 	sp = show --patience
 	origins = !git config --global --list --show-origin
 	where = "!f() { git config --show-origin --get \"$1\"; }; f"
+	tree   = log --oneline --graph --decorate --all
+	recent = log --oneline -10
+	br     = branch -vv

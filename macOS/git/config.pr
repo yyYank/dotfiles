@@ -1,4 +1,5 @@
 [alias]
+	prstat  = !git fetch -q origin main && git diff --stat origin/main...HEAD
 	prfiles = !git fetch -q origin main && git diff --name-status origin/main...HEAD
 	pr      = !git fetch -q origin main && git diff origin/main...HEAD
 	pr0     = diff origin/main...HEAD
