@@ -1,0 +1,7 @@
+[alias]
+	st = status -sb
+	df = diff --name-status
+	d  = diff
+	ds = diff --staged
+	last = show --stat --patch --decorate HEAD
+	lp = log -p --decorate --oneline -n 5
