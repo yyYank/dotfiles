@@ -6,6 +6,14 @@ source $HOMEBREW_PREFIX/opt/spaceship/spaceship.zsh
 # source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+
 export GOPATH=$HOME/go
 export PGDATA=/usr/local/var/postgres
 export LANG=ja_JP.UTF-8
