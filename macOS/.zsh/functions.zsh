@@ -14,3 +14,10 @@ ccd() {
   fi
   echo -e "\n[ q: quit ]"
 }
+
+# aliases for mobile operation
+mbal() {
+  alias gp='git push'
+  alias gpl='git pull'
+  alias gagc='git add . && git commit .'
+}
