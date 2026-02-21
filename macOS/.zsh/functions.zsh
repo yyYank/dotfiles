@@ -22,11 +22,12 @@ mbal() {
   alias gagc='echo "git add . && git commit ." && git add . && git commit .'
   alias tl='echo "tmux ls" && tmux ls'
   alias ta='echo "tmux attach -t" && tmux attach -t'
-  alias tn='echo "tmux new-session -s" && tmux new-session -s'
+  alias tn='echo "tmux next-window" && tmux next-window'
+  alias tns='echo "tmux new-session -s" && tmux new-session -s'
   alias tk='echo "tmux kill-session -t" && tmux kill-session -t'
   alias trw='echo "tmux rename-window" && tmux rename-window'
   alias bruc='echo "brew upgrade claude-code" && brew upgrade claude-code'
 
   echo "--- mbal aliases ---"
-  alias gp gpl gagc tl ta tn tk trw bruc
+  alias gp gpl gagc tl ta tn tns tk trw bruc
 }
