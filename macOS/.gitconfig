@@ -1,0 +1,14 @@
+[include]
+	path = ~/.config/git/config.main
+
+[include]
+	path = ~/.config/git/config.identity
+
+[include]
+	path = ~/.config/git/config.diff-so-fancy
+
+[include]
+	path = ~/.config/git/config.alias
+
+[include]
+	path = ~/.config/git/config.local
