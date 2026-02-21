@@ -40,6 +40,8 @@ compinit
 # End of lines added by compinstall
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzfに「.gitとかの中身は無視して探してこい」と命令する設定
+export FZF_DEFAULT_COMMAND='find . -name .git -prune -o -name node_modules -prune -o -type f -print'
   # Set Spaceship ZSH as a prompt
   autoload -U promptinit; promptinit
   prompt spaceship
@@ -58,3 +60,5 @@ export PATH="$HOME/.rd/bin:$PATH"
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
+
+[ -f ~/.zsh/functions.zsh ] && source ~/.zsh/functions.zsh
