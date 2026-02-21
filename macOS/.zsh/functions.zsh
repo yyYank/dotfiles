@@ -20,4 +20,9 @@ mbal() {
   alias gp='git push'
   alias gpl='git pull'
   alias gagc='git add . && git commit .'
+  alias tl='tmux ls'
+  alias ta='tmux attach -t'
+  alias tn='tmux new-session -s'
+  alias tk='tmux kill-session -t'
+  alias trw='tmux rename-window'
 }
