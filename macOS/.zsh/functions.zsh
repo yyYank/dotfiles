@@ -17,15 +17,15 @@ ccd() {
 
 # aliases for mobile operation
 mbal() {
-  alias gp='git push'
-  alias gpl='git pull'
-  alias gagc='git add . && git commit .'
-  alias tl='tmux ls'
-  alias ta='tmux attach -t'
-  alias tn='tmux new-session -s'
-  alias tk='tmux kill-session -t'
-  alias trw='tmux rename-window'
-  alias bruc='brew upgrade claude-code'
+  alias gp='echo "git push" && git push'
+  alias gpl='echo "git pull" && git pull'
+  alias gagc='echo "git add . && git commit ." && git add . && git commit .'
+  alias tl='echo "tmux ls" && tmux ls'
+  alias ta='echo "tmux attach -t" && tmux attach -t'
+  alias tn='echo "tmux new-session -s" && tmux new-session -s'
+  alias tk='echo "tmux kill-session -t" && tmux kill-session -t'
+  alias trw='echo "tmux rename-window" && tmux rename-window'
+  alias bruc='echo "brew upgrade claude-code" && brew upgrade claude-code'
 
   echo "--- mbal aliases ---"
   alias gp gpl gagc tl ta tn tk trw bruc
