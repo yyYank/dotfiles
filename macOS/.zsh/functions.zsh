@@ -15,6 +15,11 @@ ccd() {
   echo -e "\n[ q: quit ]"
 }
 
+# show PR diff with diff-so-fancy (optional PR number)
+prd() {
+  gh pr diff "$@" | diff-so-fancy | less -R
+}
+
 # summarize PR diff with Claude
 prsum() {
   local pr=${1:-""}
@@ -39,9 +44,8 @@ mbal() {
   alias bruc='echo "brew upgrade claude-code" && brew upgrade claude-code'
   alias prv='echo "gh pr view" && gh pr view'
   alias prl='echo "gh pr list" && gh pr list'
-  alias prd='echo "gh pr diff | diff-so-fancy" && gh pr diff | diff-so-fancy | less -R'
   alias prco='echo "gh pr checkout" && gh pr checkout'
 
   echo "--- mbal aliases ---"
-  alias gp gpl gagc tl ta tn tns tk trw bruc prv prl prd prco
+  alias gp gpl gagc tl ta tn tns tk trw bruc prv prl prco
 }
