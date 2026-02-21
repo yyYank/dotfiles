@@ -25,4 +25,8 @@ mbal() {
   alias tn='tmux new-session -s'
   alias tk='tmux kill-session -t'
   alias trw='tmux rename-window'
+  alias bruc='brew upgrade claude-code'
+
+  echo "--- mbal aliases ---"
+  alias gp gpl gagc tl ta tn tk trw bruc
 }
