@@ -6,3 +6,7 @@
 	prw     = !git fetch -q origin main && git diff -w origin/main...HEAD
 	prm     = !git fetch -q origin main && git diff --color-moved origin/main...HEAD
 	prp     = !git fetch -q origin main && git diff --patience origin/main...HEAD
+	prview  = !gh pr view
+	prlist  = !gh pr list
+	prdiff  = !gh pr diff
+	prco    = !gh pr checkout
