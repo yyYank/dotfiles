@@ -1,5 +1,6 @@
 ---
-name: review-front
+name: review-frontend
+user-invocable: true
 description: フロントエンドコードのレビュー。コンポーネント設計、パフォーマンス、アクセシビリティの観点を重視。
 ---
 

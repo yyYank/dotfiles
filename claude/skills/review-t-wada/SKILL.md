@@ -1,5 +1,6 @@
 ---
 name: review-t-wada
+user-invocable: true
 description: t_wadaスタイルでコードレビュー。テスト駆動開発、テスタビリティ、保守性の観点を重視。
 ---
 

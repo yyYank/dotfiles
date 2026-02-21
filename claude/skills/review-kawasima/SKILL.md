@@ -1,5 +1,6 @@
 ---
 name: review-kawasima
+user-invocable: true
 description: kawasimaスタイルでコードレビュー。アーキテクチャ、設計原則、ドメインモデリングの観点を重視。
 ---
 

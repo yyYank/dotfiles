@@ -1,5 +1,6 @@
 ---
 name: review-db
+user-invocable: true
 description: データベース設計・SQLクエリのレビュー。スキーマ設計、インデックス、パフォーマンスの観点を重視。
 ---
 

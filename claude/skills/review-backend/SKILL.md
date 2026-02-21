@@ -1,5 +1,6 @@
 ---
 name: review-backend
+user-invocable: true
 description: バックエンドコードのレビュー。アーキテクチャ、セキュリティ、パフォーマンスの観点を重視。
 ---
 

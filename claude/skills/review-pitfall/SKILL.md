@@ -1,5 +1,6 @@
 ---
 name: review-pitfall
+user-invocable: true
 description: AIがやりがちで、レビューで見落としがちな観点をチェック。境界値、競合状態、エラー処理の漏れなど、有識者でないと気づきにくい落とし穴を検出。
 ---
 
