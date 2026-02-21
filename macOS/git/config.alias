@@ -11,3 +11,5 @@
 	sw = show -w
 	sm = show --color-moved
 	sp = show --patience
+	origins = !git config --global --list --show-origin
+	where = "!f() { git config --show-origin --get \"$1\"; }; f"
