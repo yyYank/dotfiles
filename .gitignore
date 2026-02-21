@@ -1,4 +1,5 @@
 config.identity
+config.local
 identity.*
 *.identity
 
