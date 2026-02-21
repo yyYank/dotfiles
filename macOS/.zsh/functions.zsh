@@ -39,7 +39,7 @@ mbal() {
   alias bruc='echo "brew upgrade claude-code" && brew upgrade claude-code'
   alias prv='echo "gh pr view" && gh pr view'
   alias prl='echo "gh pr list" && gh pr list'
-  alias prd='echo "gh pr diff" && gh pr diff'
+  alias prd='echo "gh pr diff | diff-so-fancy" && gh pr diff | diff-so-fancy | less -R'
   alias prco='echo "gh pr checkout" && gh pr checkout'
 
   echo "--- mbal aliases ---"

@@ -8,5 +8,5 @@
 	prp     = !git fetch -q origin main && git diff --patience origin/main...HEAD
 	prview  = !gh pr view
 	prlist  = !gh pr list
-	prdiff  = !gh pr diff
+	prdiff  = !gh pr diff | diff-so-fancy | less -R
 	prco    = !gh pr checkout
