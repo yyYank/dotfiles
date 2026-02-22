@@ -1,3 +1,6 @@
+# prompt: show directory and filename only
+set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
+
 # two pane layout (directory + preview)
 set ratios 1:2
 
