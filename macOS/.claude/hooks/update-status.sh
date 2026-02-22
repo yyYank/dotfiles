@@ -1,13 +1,17 @@
 #!/bin/bash
-# update tmux status cache with ccusage session data
+# update tmux pane-border-format with ccusage session data
+
+# tmux の外から実行された場合はスキップ
+[ -z "$TMUX" ] && exit 0
 
 OUTPUT=$(npx ccusage blocks --json --active --token-limit 45000 2>/dev/null)
 
 if [ -z "$OUTPUT" ]; then
+    tmux set -g @claude_status ""
     exit 0
 fi
 
-echo "$OUTPUT" | python3 -c "
+RESULT=$(echo "$OUTPUT" | python3 -c "
 import sys, json, re
 from datetime import datetime
 
@@ -29,5 +33,11 @@ tokens_str = f'{tokens // 1000}k/{limit // 1000}k' if tokens >= 1000 else f'{tok
 cost = b.get('costUSD', 0)
 now = datetime.now().strftime('%m/%d %H:%M')
 
-print(f'{model} | {tokens_str} | \${cost:.2f} | {now}')
-" > ~/.cache/claude-status.txt 2>/dev/null
+print(f'#[fg=colour255,bg=colour54] \u26a1{model} #[fg=colour255,bg=colour25] \u25c6 {tokens_str} #[fg=colour255,bg=colour30] \$ {cost:.2f} #[fg=colour250,bg=colour238] \u23f1 {now} #[default]')
+" 2>/dev/null)
+
+if [ -n "$RESULT" ]; then
+    tmux set -g @claude_status "$RESULT"
+else
+    tmux set -g @claude_status ""
+fi
