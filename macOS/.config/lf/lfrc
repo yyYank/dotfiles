@@ -1,0 +1,22 @@
+# two pane layout (directory + preview)
+set ratios 1:2
+
+# show hidden files
+set hidden
+
+# preview
+set preview true
+set previewer ~/.config/lf/preview.sh
+set cleaner ~/.config/lf/cleaner.sh
+
+# open file with chroma, edit with vim
+cmd open $chroma -s dracula -f terminal16m "$f" | less -R
+map e $vim "$f"
+
+# delete file/directory
+cmd delete ${{
+    printf "delete '$fx'? [y/n] "
+    read -r ans
+    [ "$ans" = "y" ] && rm -rf "$fx"
+}}
+map D delete
