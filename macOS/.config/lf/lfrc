@@ -12,7 +12,7 @@ set preview true
 set previewer ~/.config/lf/preview.sh
 set cleaner ~/.config/lf/cleaner.sh
 
-# open file with chroma, edit with vim
+# open file with chroma
 cmd open $chroma -s dracula -f terminal16m "$f" | less -R
 map e $vim "$f"
 
