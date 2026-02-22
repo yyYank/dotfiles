@@ -27,9 +27,9 @@ model = [m for m in models if not m.startswith('<')][-1] if any(not m.startswith
 model = model.replace('claude-', '')
 model = re.sub(r'-\d{8}$', '', model)
 
-tokens = b.get('totalTokens', 0)
-limit = b.get('tokenLimitStatus', {}).get('limit', 45000)
-tokens_str = f'{tokens // 1000}k/{limit // 1000}k' if tokens >= 1000 else f'{tokens}/{limit // 1000}k'
+tc = b.get('tokenCounts', {})
+tokens = tc.get('inputTokens', 0) + tc.get('outputTokens', 0)
+tokens_str = f'{tokens // 1000}k' if tokens >= 1000 else str(tokens)
 cost = b.get('costUSD', 0)
 now = datetime.now().strftime('%m/%d %H:%M')
 
