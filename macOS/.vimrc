@@ -47,6 +47,8 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+" plugin settings =======================================
+let g:airline#extensions#tmux#enabled = 0
 " key mapping============================================
 if filereadable(expand('$HOME/.vim/key_map.vim'))
   source $HOME/.vim/key_map.vim

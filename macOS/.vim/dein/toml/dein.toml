@@ -181,6 +181,9 @@ repo = 'vim-airline/vim-airline'
 hook_add = '''
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tmuxline#enabled = 0
+    let g:airline_section_b = '%{fnamemodify(getcwd(), ":t")} | %{airline#extensions#branch#get_head()}'
+    let g:airline_section_y = ''
 '''
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
