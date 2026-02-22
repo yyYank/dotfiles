@@ -2,7 +2,7 @@ eval "$(/usr/local/bin/brew shellenv)"
 source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOMEBREW_PREFIX/opt/spaceship/spaceship.zsh
+source /usr/local/lib/node_modules/spaceship-prompt/spaceship.zsh
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
