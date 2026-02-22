@@ -9,6 +9,7 @@ fi
 
 echo "$OUTPUT" | python3 -c "
 import sys, json, re
+from datetime import datetime
 
 data = json.load(sys.stdin)
 sessions = data.get('sessions', [])
@@ -20,11 +21,11 @@ models = s.get('modelsUsed', ['unknown'])
 model = models[-1] if models else 'unknown'
 model = model.replace('claude-', '')
 model = re.sub(r'-\d{8}$', '', model)
-model = re.sub(r'(-\d+)+$', '', model)
 
 tokens = s.get('totalTokens', 0)
 tokens_str = f'{tokens // 1000}k' if tokens >= 1000 else str(tokens)
 cost = s.get('totalCost', 0)
+now = datetime.now().strftime('%m/%d %H:%M')
 
-print(f'{model} | {tokens_str} | \${cost:.2f}')
+print(f'{model} | {tokens_str} | \${cost:.2f} | {now}')
 " > ~/.cache/claude-status.txt 2>/dev/null
