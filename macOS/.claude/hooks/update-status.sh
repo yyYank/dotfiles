@@ -3,11 +3,12 @@
 
 # tmux の外から実行された場合はスキップ
 [ -z "$TMUX" ] && exit 0
+[ -z "$TMUX_PANE" ] && exit 0
 
 OUTPUT=$(npx ccusage blocks --json --active --token-limit 45000 2>/dev/null)
 
 if [ -z "$OUTPUT" ]; then
-    tmux set -g @claude_status ""
+    tmux set -p -t "$TMUX_PANE" @claude_status ""
     exit 0
 fi
 
@@ -37,7 +38,7 @@ print(f'#[fg=colour255,bg=colour54] \u26a1{model} #[fg=colour255,bg=colour25] \u
 " 2>/dev/null)
 
 if [ -n "$RESULT" ]; then
-    tmux set -g @claude_status "$RESULT"
+    tmux set -p -t "$TMUX_PANE" @claude_status "$RESULT"
 else
-    tmux set -g @claude_status ""
+    tmux set -p -t "$TMUX_PANE" @claude_status ""
 fi
