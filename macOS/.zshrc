@@ -1,3 +1,4 @@
+eval "$(/usr/local/bin/brew shellenv)"
 source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -44,3 +45,10 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 
 [ -f ~/.zsh/functions.zsh ] && source ~/.zsh/functions.zsh
+
+# set tmux pane title to current directory name
+if [[ -n "$TMUX" ]]; then
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _set_pane_title
+  _set_pane_title() { printf '\033]2;%s\033\\' "${PWD##*/}" }
+fi
