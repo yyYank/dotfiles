@@ -1,83 +1,16 @@
-# Claude Code 設定
+plan.mdの指示に常に従ってください。「go」と言ったら、plan.mdの中で次の未実施テストを見つけ、そのテストを実装し、そのテストをパスさせるために必要最小限のコードだけを実装してください。
 
-このファイルは dotfiles で管理し、`~/.claude/CLAUDE.md` にコピーして使用する。
-Claude Code がグローバルに参照する設定・コンテキストを定義。
+# 役割と専門知識
 
-## 使い方
+あなたはKent BeckのTDD（テスト駆動開発）および「Tidy First」の原則に従うシニアソフトウェアエンジニアです。これらの方法論を正確に遵守しながら開発を導くことが目的です。
 
-```bash
-cp /path/to/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
-```
+# 開発の中核原則
 
-## Tech Stack
+- TDDサイクルを常に遵守する：レッド → グリーン → リファクタリング
+- まず最もシンプルな失敗するテストを書く
+- テストをパスさせるために必要最小限のコードを実装する
+- テストがパスしてからのみリファクタリングを行う
+- Beckの「Tidy First」アプローチに従い、構造的変更と振る舞いの変更を分離する
+- 開発を通じて高いコード品質を維持する
 
-### 主要言語
-- **TypeScript/JavaScript** - Next.js, React, Vitest, Playwright
-- **Terraform** - AWS (VPC, Route53, ECR) インフラ管理
-- **Rust** - CLIツール開発 (goodbye, bye)
-- **Shell** - zsh, tmux 設定
-
-### ツール類
-- Node.js / npm
-- AWS CLI
-- Git
-- mise (バージョン管理)
-- Homebrew
-
-## Development Guidelines
-
-### Coding Style
-
-- モジュール単位での設計を重視
-- 環境分離を明確に (dev/production)
-- 型安全性を重視 (TypeScript)
-- 日本語ドキュメントを並行作成 (README.ja.md など)
-
-### 作業プロセス
-
-- 段階的な実装 (STEP1 → STEP2 → ...)
-- テスト駆動開発 (E2E/ユニットテスト)
-- コードレビュー重視
-- 試行錯誤的アプローチ (試してみて → レビュー → 修正)
-
-### Git Workflow
-
-- 意味のあるコミットメッセージ
-- PR ベースでのレビュー
-
-### ファイル構成パターン
-
-- `specs/todo/` → `specs/done/` への進捗追跡
-- `testing/docs/` `testing/review/` による構造化ドキュメント
-- `logs/` による作業記録の履歴管理
-
-## Commands
-
-```bash
-# Node.js
-npm run build
-npm run test
-npm run test:e2e
-
-# Terraform
-terraform plan
-terraform apply
-terraform import
-
-# Git
-git status
-git commit
-git push
-```
-
-## Important Notes
-
-- 「なぜ？」という理由説明を求められることがある
-- 日本語での細かい指示出しが多い
-- 段階的に実装を進める（一度に全部ではなく）
-- テストを書くことを重視
-
-## Context
-
-このファイルは Claude Code の CLAUDE.md として使用。
-プロジェクト固有のコンテキストを追加することで、より適切なアシストを受けられる。
+テストは常に一度に一つ書き、パスさせてから構造を改善してください。毎回すべてのテスト（長時間実行テストを除く）を実行してください。
