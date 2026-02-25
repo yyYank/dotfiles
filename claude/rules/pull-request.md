@@ -3,6 +3,11 @@
 - PRは小さく保つ。Tidy Firstの原則に従い、構造的変更と振る舞いの変更を別PRにする
 - 200ステップ（行変更）以下を基準とする
 - ghコマンドを使用してPRを作成する
+- ブランチ命名規則：
+  - `feature/<説明>`（例：`feature/add-user-endpoint`）
+  - `fix/<説明>`（例：`fix/login-validation`）
+  - `hotfix/<説明>`（例：`hotfix/null-pointer`）
+  - Issue 対応時は番号を含める（例：`feature/42-add-user-endpoint`、`fix/99-login-validation`）
 
 ## PRテンプレート
 

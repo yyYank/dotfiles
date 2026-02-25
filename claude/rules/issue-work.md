@@ -48,7 +48,7 @@ IssueをPickして実装・PRを出すサイクルを繰り返します。
 
 ## PR規則
 
-- ブランチ名：`claude-code/<issue番号>-<簡潔な説明>`（例：`claude-code/42-add-user-endpoint`）
+- ブランチ名：`feature/<issue番号>-<簡潔な説明>` または `fix/<issue番号>-<簡潔な説明>`（例：`feature/42-add-user-endpoint`、`fix/99-login-validation`）
 - PRタイトル：`[Claude Code] #<issue番号> <Issueタイトル>`
 - PRの説明には必ず対応IssueのCloses参照を入れる（例：`Closes #42`）
 - テストとlintが通っていることを確認してからPRを出す
