@@ -1,8 +1,12 @@
-eval "$(/usr/local/bin/brew shellenv)"
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/lib/node_modules/spaceship-prompt/spaceship.zsh
+source $HOMEBREW_PREFIX/opt/spaceship/spaceship.zsh
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -52,3 +56,5 @@ if [[ -n "$TMUX" ]]; then
   add-zsh-hook precmd _set_pane_title
   _set_pane_title() { printf '\033]2;%s\033\\' "${PWD##*/}" }
 fi
+
+
