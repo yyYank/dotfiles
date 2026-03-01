@@ -26,7 +26,7 @@
 | [tmux](https://github.com/tmux/tmux) | ターミナルマルチプレクサ |
 | [vim](https://www.vim.org/) | エディタ |
 | [lf](https://github.com/gokcehan/lf) | ターミナルファイラ |
-| [chroma](https://github.com/alecthomas/chroma) | シンタックスハイライト |
+| [bat](https://github.com/sharkdp/bat) | シンタックスハイライト |
 | [fzf](https://github.com/junegunn/fzf) | ファジーファインダー |
 | [ghq](https://github.com/x-motemen/ghq) | リポジトリ管理 |
 | [mise](https://github.com/jdx/mise) | ランタイムバージョン管理 |

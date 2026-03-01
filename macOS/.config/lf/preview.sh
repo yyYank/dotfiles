@@ -1,2 +1,2 @@
 #!/bin/bash
-chroma -s dracula -f terminal16m "$1"
+bat --color=always --style=numbers --line-range=:500 "$1"

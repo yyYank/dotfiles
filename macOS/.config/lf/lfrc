@@ -12,8 +12,8 @@ set preview true
 set previewer ~/.config/lf/preview.sh
 set cleaner ~/.config/lf/cleaner.sh
 
-# open file with chroma
-cmd open $chroma -s dracula -f terminal16m "$f" | less -R
+# open file with bat
+cmd open $bat --paging=always --color=always "$f"
 map e $vim "$f"
 
 # delete file/directory

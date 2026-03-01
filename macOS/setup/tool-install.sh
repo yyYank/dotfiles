@@ -40,7 +40,7 @@ fi
 # --- go install ---
 go install github.com/gokcehan/lf@latest
 go install github.com/x-motemen/ghq@latest
-go install github.com/alecthomas/chroma/v2/cmd/chroma@latest
+brew install bat
 
 # --- npm install -g ---
 npm install -g spaceship-prompt
