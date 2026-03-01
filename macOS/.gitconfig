@@ -5,7 +5,7 @@
 	path = ~/.config/git/config.identity
 
 [include]
-	path = ~/.config/git/config.diff-so-fancy
+	path = ~/.config/git/config.delta
 
 [include]
 	path = ~/.config/git/config.alias
