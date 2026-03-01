@@ -45,7 +45,8 @@ mbal() {
   alias prv='echo "gh pr view" && gh pr view'
   alias prl='echo "gh pr list" && gh pr list'
   alias prco='echo "gh pr checkout" && gh pr checkout'
+  alias gdsf='GIT_PAGER="diff-so-fancy | less --tabs=4 -RFX" git'
 
   echo "--- mbal aliases ---"
-  alias gp gpl gagc tl ta tn tns tk trw bruc prv prl prco
+  alias gp gpl gagc tl ta tn tns tk trw bruc prv prl prco gdsf
 }
