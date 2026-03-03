@@ -15,6 +15,7 @@
 | ファイラ | `.config/lf/lfrc`, `.config/lf/preview.sh` |
 | Git | `.gitconfig`, `git/config.*` |
 | Claude Code | `.claude/hooks/update-status.sh`, `claude/settings.json`, `claude/skills/` |
+| Codex | `codex/AGENTS.md`, `codex/rules/`, `codex/skills/`, `setup/sync-codex.sh` |
 | Arch 固有 | `.xmonad/`, `.xmobarrc`, `.Xresources`, `.xinitrc` |
 | セットアップ | `setup/tool-install.sh` |
 
