@@ -23,6 +23,10 @@
       "Bash(git reset --hard*)"
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "env": {
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
   },
