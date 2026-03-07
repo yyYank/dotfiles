@@ -15,9 +15,9 @@
 | ファイラ | `.config/lf/lfrc`, `.config/lf/preview.sh` |
 | Git | `.gitconfig`, `git/config.*` |
 | Claude Code | `.claude/hooks/update-status.sh`, `claude/settings.json`, `claude/skills/` |
-| Codex | `codex/AGENTS.md`, `codex/rules/`, `codex/skills/`, `setup/sync-codex.sh` |
+| Codex | `codex/AGENTS.md`, `codex/rules/`, `codex/skills/`, `macOS/setup/sync-codex.sh` |
 | Arch 固有 | `.xmonad/`, `.xmobarrc`, `.Xresources`, `.xinitrc` |
-| セットアップ | `setup/tool-install.sh` |
+| セットアップ | `macOS/setup/tool-install.sh`, `arch/setup/tool-install.sh` |
 
 ## 要求ライブラリ / ツール
 
@@ -34,3 +34,29 @@
 | [spaceship-prompt](https://github.com/spaceship-prompt/spaceship-prompt) | zsh プロンプト |
 | [ccusage](https://github.com/ryoppippi/ccusage) | Claude Code 使用状況取得 |
 | zsh-autosuggestions, zsh-syntax-highlighting, zsh-history-substring-search | zsh プラグイン |
+
+## セットアップ
+
+### macOS
+
+```bash
+bash macOS/setup/tool-install.sh
+```
+
+Codex 用設定を `$HOME/.codex` へ同期する場合:
+
+```bash
+bash macOS/setup/sync-codex.sh
+```
+
+### Arch Linux
+
+```bash
+bash arch/setup/tool-install.sh
+```
+
+補助スクリプト:
+
+- `arch/setup/fzf_install.sh`
+- `arch/setup/font-install.sh`
+- `arch/setup/ime-setting.sh`
