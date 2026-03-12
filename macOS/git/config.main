@@ -2,7 +2,7 @@
 	defaultBranch = main
 
 [ghq]
-	root = ~/.ghq
+	root = ~/ghq
 
 [push]
 	default = current

@@ -29,6 +29,7 @@ export PATH=$GOPATH:$GOPATH/bin:$JAVA_HOME/bin:$PATH
 alias -g gbpath='export GOPATH=$(pwd):$(pwd)/vendor:$HOME/go:'
 alias -g co='branch|fzf|xargs git checkout'
 alias -g ghql='cd $(ghq list --p|fzf) && basename `pwd` | xargs tmux rename-window'
+alias -g gwqa='gwq add $(git branch|fzf)'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fzfに「.gitとかの中身は無視して探してこい」と命令する設定
@@ -41,7 +42,7 @@ export SDKMAN_DIR="/Users/yy_yank/.sdkman"
 eval "$(mise activate zsh)"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$HOME/.rd/bin:$PATH"
+export PATH="/Users/yy_yank/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 autoload -Uz edit-command-line
@@ -56,5 +57,3 @@ if [[ -n "$TMUX" ]]; then
   add-zsh-hook precmd _set_pane_title
   _set_pane_title() { printf '\033]2;%s\033\\' "${PWD##*/}" }
 fi
-
-
