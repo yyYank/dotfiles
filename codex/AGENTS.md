@@ -5,6 +5,7 @@
 以下のルールファイルを参照してください。
 
 - [default.rules](rules/default.rules) — コマンドの自動許可ルール
+- [boundaries.md](rules/boundaries.md) — 自律行動の境界ルール
 - [workflow.md](rules/workflow.md) — コミット・プッシュ・ブランチ操作のワークフロールール
 - [release-artifacts.md](rules/release-artifacts.md) — リリース成果物に関するルール
 - [tdd.md](rules/tdd.md) — TDD方法論のガイダンス
