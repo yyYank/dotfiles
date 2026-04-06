@@ -18,9 +18,13 @@
       "Read(~/.ssh/*)",
       "Read(~/.aws/*)",
       "Read(~/.config/gh/*)",
+      "Bash(gh repo *)",
       "Bash(rm -rf *)",
+      "Bash(git push *)",
       "Bash(git push --force*)",
-      "Bash(git reset --hard*)"
+      "Bash(git rebase *)",
+      "Bash(git reset --hard*)",
+      "Bash(terraform *)"
     ]
   },
   "statusLine": {
@@ -52,6 +56,7 @@
       }
     ]
   },
+  "model": "opus",
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
   }
