@@ -1,26 +1,41 @@
-# Release Artifact Rules
+# リリース成果物ルール
 
-These rules apply whenever a task changes release packaging, GitHub Release attachments, installer bundling, archive contents, or CI steps that publish deliverables.
+リリースパッケージング、GitHub Releaseの添付、インストーラーバンドル、アーカイブ内容、CI公開ステップに変更が及ぶ場合に適用する。
 
-1. Do not infer what "binary", "bundle", "artifact", or "package" means.
-2. Before editing any workflow, release script, or PR body, first state the final deliverables in concrete form.
-3. The concrete form must include:
-   - the exact release attachment filename(s)
-   - the exact archive filename(s)
-   - the exact file path(s) that will exist inside each archive
-4. Treat `.dmg`, `.exe`, `.AppImage`, unpacked directories, and helper scripts as different deliverable types. Never substitute one for another without explicit confirmation.
-5. If the request is ambiguous, ask one short clarification question before making edits.
-6. Do not create, edit, or update a PR until the concrete deliverable list matches the implementation.
-7. Before push or PR creation, restate the final deliverables again in concrete form.
+## 絶対に守ること（これだけは必ず）
 
-Repository-specific guardrails for `mailark`:
+- 「バイナリ」「バンドル」「アーティファクト」「パッケージ」の意味を推測しない。ユーザーに具体的なファイル名を確認する
+- `.dmg` / `.exe` / `.AppImage` / 展開済みディレクトリ / ヘルパースクリプトは全て別の成果物として扱う。ユーザーの明示的な指示なしに置き換えない（例：`.dmg` を `mac-universal/` に差し替えるのは禁止）
 
-- For macOS release bundle changes, do not replace `mailark-<version>-mac-universal.dmg` with `mac-universal/` unless explicitly requested.
-- For Windows release bundle changes, do not replace `mailark-<version>-windows-x64.exe` with `win-unpacked/` unless explicitly requested.
-- If the version were `0.0.10`, the concrete artifact description must look like this:
-  - `mailark-0.0.10-mac-bundle.zip`
-  - `mailark-0.0.10-mac-bundle/install-setup.sh`
-  - `mailark-0.0.10-mac-bundle/mailark-0.0.10-mac-universal.dmg`
-  - `mailark-0.0.10-win-bundle.zip`
-  - `mailark-0.0.10-win-bundle/install-setup.bat`
-  - `mailark-0.0.10-win-bundle/mailark-0.0.10-windows-x64.exe`
+## ワークフロー・リリーススクリプト・PR本文を編集する前の手順
+
+1. 最終成果物を以下の形式で列挙する：
+   - リリース添付ファイル名（例：`app-0.0.10-mac-bundle.zip`）
+   - アーカイブファイル名（例：`app-0.0.10-mac-bundle.zip`）
+   - アーカイブ内のファイルパス（例：`app-0.0.10-mac-bundle/install-setup.sh`）
+2. ユーザーに提示して「この成果物リストで合っていますか？」と確認する
+3. 確認が取れてから編集を開始する。成果物リストの提示なしで編集を始めるのは禁止
+
+## プッシュ・PR作成の直前
+
+成果物リストを再度提示する。編集前に提示した内容と差異がある場合、差異を明示してユーザーに確認する。
+
+## 曖昧なリクエストへの対応
+
+成果物が特定できない場合、1つだけ短い質問をしてから作業に入る。推測で進めない。
+
+## mailark 固有ルール
+
+バージョンが `0.0.10` の場合、成果物は以下の通り：
+
+```
+mailark-0.0.10-mac-bundle.zip
+  ├── mailark-0.0.10-mac-bundle/install-setup.sh
+  └── mailark-0.0.10-mac-bundle/mailark-0.0.10-mac-universal.dmg
+
+mailark-0.0.10-win-bundle.zip
+  ├── mailark-0.0.10-win-bundle/install-setup.bat
+  └── mailark-0.0.10-win-bundle/mailark-0.0.10-windows-x64.exe
+```
+
+この構造を崩す変更を提案・実装する前に、ユーザーの明示的な許可を得る。

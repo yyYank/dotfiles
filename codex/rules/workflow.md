@@ -1,18 +1,56 @@
 # Workflow Rules
 
-1. Before any commit or push, verify the target branch and the target PR match the user's intent.
-2. Before any push, explicitly verify the push destination branch is correct.
-3. Before merge, rebase, or cherry-pick work, fetch the latest remote state first and start from that latest remote branch to avoid unnecessary rebases.
-4. Treat `main`, `master`, and other default branches as protected branches.
-5. Never force-push to a protected branch, even when the user asks to amend, squash, or rewrite history, unless the user explicitly says `force push` or `--force-with-lease`.
-6. If a requested action would require rewriting history on a protected branch, stop and ask one short confirmation question that explicitly says it requires a force push.
-7. Prefer creating a new commit over amending or rewriting history on a protected branch.
-8. If the user asks to amend after a commit has already been pushed to a protected branch, do not rewrite that branch by default. Offer to create a follow-up commit or do the amend on a separate branch instead.
-9. Do not describe failures with vague words like `雑でした`. Name the failure precisely as one of: `理解不足`, `検証不足`, `設計ミス`, or `運用違反`.
-10. When a mistake is pointed out, explain the concrete failure and the concrete preventive action. Do not use softened language that blurs responsibility.
-11. For changes that affect core execution paths, external processes, media generation, deployment, or git history, do not claim completion from unit tests alone. State exactly which of `unit test`, `lint`, `format`, `integration test`, and `real execution check` were performed.
-12. If the same problem area has already required more than one fix attempt, stop shipping speculative fixes. Add or run a tighter reproduction or integration test before the next code change or PR.
-13. Do not default to denial when the user points out damage, stray files, or side effects caused during the session. If the agent could plausibly have caused it, say so plainly and take responsibility first.
-14. When evidence is incomplete, do not use uncertainty as a shield. State the known facts, acknowledge plausible responsibility, and offer the concrete cleanup or verification step.
-15. Never run `terraform plan` or `terraform apply` unless the user explicitly instructs that exact Terraform command in that turn. Default to code inspection and command suggestion only, even when the next Terraform step seems obvious.
-16. Treat `terraform plan` and `terraform apply` as at least as sensitive as `git push`. If the agent runs either command without explicit approval, acknowledge it as an `運用違反`, state exactly what was run, and stop making further Terraform execution changes until the user directs the next step.
+## 絶対に守ること（これだけは必ず）
+
+- `main`, `master`, その他デフォルトブランチへの force-push は禁止。ユーザーが `force push` または `--force-with-lease` と明示的に発言した場合のみ許可
+- `terraform plan` / `terraform apply` はユーザーがそのターンで明示的に指示した場合のみ実行する。「次はplanですね」と推測して実行した時点で運用違反
+- ミスを指摘されたとき、`雑でした` `想定外でした` と言わない。以下の4つから該当するものを選んで名指しする：`理解不足` / `検証不足` / `設計ミス` / `運用違反`
+
+## コミット・プッシュ前の確認手順
+
+コミットまたはプッシュを実行する前に、毎回以下を確認する：
+
+1. 現在のブランチ名が意図したブランチか（`git branch --show-current` で確認）
+2. プッシュ先のリモートブランチが意図した宛先か（`git remote -v` と合わせて確認）
+3. 対象PRが存在する場合、そのPRのベースブランチが正しいか
+
+1つでも不一致があればコミット・プッシュを中止し、ユーザーに報告する。
+
+## merge / rebase / cherry-pick の前に
+
+1. `git fetch origin` を実行してリモートの最新状態を取得する
+2. 最新のリモートブランチから作業を開始する
+3. fetchせずにmerge/rebase/cherry-pickを始めるのは禁止
+
+## protectedブランチでの履歴操作
+
+- protectedブランチ上で `amend` / `rebase` / `squash` が必要になった場合：新しいコミットを作成するか、別ブランチで作業することを提案する
+- 履歴書き換えが本当に必要な場合：「これはprotectedブランチへのforce pushが必要です。実行してよいですか？」と明示的に確認する。確認なしで実行したら運用違反
+
+## ミス発生時の報告フォーマット
+
+```
+失敗の種類：[理解不足 / 検証不足 / 設計ミス / 運用違反]
+何が起きたか：<事実を1-2文で>
+原因：<なぜ起きたか>
+防止策：<次回から何をするか>
+```
+
+- 曖昧な表現で責任をぼかさない
+- ユーザーがダメージや副作用を指摘した場合、「自分が原因である可能性がある」と認めてから調査する。最初に否定しない
+
+## 検証レベルの明示
+
+コア実行パス・外部プロセス・デプロイ・git履歴に影響する変更の完了報告時、以下のどれを実施したか明示する：
+
+- [ ] unit test
+- [ ] lint
+- [ ] format
+- [ ] integration test
+- [ ] real execution check（実際に動かして確認）
+
+「テスト通りました」だけで完了報告しない。どのレベルまで確認したかを列挙する。
+
+## 同じ箇所の修正が2回失敗したら
+
+3回目の修正コードを書く前に、再現テストまたはintegration testを追加する。テストなしで推測修正を繰り返すのは禁止。
