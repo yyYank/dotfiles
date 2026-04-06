@@ -19,7 +19,7 @@ setopt EXTENDED_HISTORY
 export GOPATH=$HOME/go
 export PGDATA=/usr/local/var/postgres
 export LANG=ja_JP.UTF-8
-fpath=($HOMEBREW_PREFIX/share/zsh-completions $fpath)
+fpath=(~/.zfunc $HOMEBREW_PREFIX/share/zsh-completions $fpath)
 autoload -Uz compinit
 compinit
 
@@ -41,10 +41,6 @@ export SDKMAN_DIR="/Users/yy_yank/.sdkman"
 
 eval "$(mise activate zsh)"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/yy_yank/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
@@ -57,3 +53,13 @@ if [[ -n "$TMUX" ]]; then
   add-zsh-hook precmd _set_pane_title
   _set_pane_title() { printf '\033]2;%s\033\\' "${PWD##*/}" }
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yy_yank/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yy_yank/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yy_yank/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yy_yank/google-cloud-sdk/completion.zsh.inc'; fi
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/yy_yank/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
