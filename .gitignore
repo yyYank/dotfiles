@@ -3,6 +3,8 @@ config.local
 identity.*
 *.identity
 
+macOS/.zsh/local.zsh
+
 */.vim/dein/.cache
 */.vim/dein/repos
 */.vim/.netrwhist
