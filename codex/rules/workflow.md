@@ -53,7 +53,7 @@
 - 曖昧な表現で責任をぼかさない
 - ユーザーがダメージや副作用を指摘した場合、「自分が原因である可能性がある」と認めてから調査する。最初に否定しない
 
-## 検証レベルの明示
+## code-change / debug 時の検証レベルの明示
 
 コア実行パス・外部プロセス・デプロイ・git履歴に影響する変更の完了報告時、以下のどれを実施したか明示する：
 
@@ -66,7 +66,7 @@
 「テスト通りました」だけで完了報告しない。どのレベルまで確認したかを列挙する。
 
 
-## Definition of Done / 完了条件
+## code-change / debug 時の Definition of Done / 完了条件
 Do not say the task is complete unless all are true:
 以下をすべて満たすまで完了としない：
 
@@ -81,7 +81,7 @@ Do not say the task is complete unless all are true:
 5. Remaining risks are listed.
    未解決リスクが列挙されている
 
-## Final Response Format / 最終出力フォーマット
+## code-change / debug 時の Final Response Format / 最終出力フォーマット
 Always end with exactly these sections:
 必ず以下の形式で出力する：
 
@@ -93,6 +93,8 @@ Always end with exactly these sections:
 
 Do not omit any section. If unknown, write "Unknown".
 省略禁止。不明な場合は「Unknown」と書く。
+
+`question` モードの通常応答には適用しない。
 
 ## 同じ箇所の修正が2回失敗したら
 

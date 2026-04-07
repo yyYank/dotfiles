@@ -6,18 +6,10 @@
 - 指示されたリポジトリ以外のファイルを変更しない。別リポジトリへの変更が必要な場合は、差分をテキストで提示してユーザーに委ねる
 
 ## Edit Scope / 編集可能範囲
-- Allowed: src/**, tests/**
-  許可: src/**, tests/**
-- Forbidden unless explicitly requested:
-  明示指示がない限り禁止:
-  - package.json
-  - lockfiles
-  - migrations/**
-  - infra/**
-  - docs/public-api/**
 
-- Never rename files, move directories, or change public interfaces.
-  ファイル名変更・ディレクトリ移動・public API変更は禁止
+- 変更範囲は、そのリポジトリと依頼内容に即して最小化する
+- repo 固有の編集可能範囲がある場合はそれを優先する
+- 広い横断変更、ファイル移動、public interface 変更は明示依頼がない限り避ける
 
 ## CI/CD失敗時の対応手順
 
