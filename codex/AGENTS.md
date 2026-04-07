@@ -24,3 +24,41 @@
 
 - ルール同士が矛盾する場合：boundaries.md > workflow.md > 他のルールの順で優先する
 - 実装すべきか判断できない場合：実装せずユーザーに質問する
+
+## REQUIRED VERIFICATION / 必須検証
+- Before declaring completion, ALWAYS run repository-defined verification commands.
+- 完了前に必ずリポジトリ定義の検証コマンドを実行すること
+
+Rules:
+- NEVER invent commands
+- If none found → "verification command not found" and STOP
+- 検証コマンドを推測しない
+- 無い場合は「verification command not found」と出して停止
+
+
+## FINAL RESPONSE FORMAT / 最終報告形式
+必ず以下で終了すること：
+
+### Root Cause / 原因
+### Fix / 修正内容
+### Changed Files / 変更ファイル
+### Verification / 検証
+### Remaining Risks / 未解決リスク
+
+Rules:
+- 省略禁止
+- 不明は "Unknown"
+
+
+## FAILURE BEHAVIOR / 失敗時の挙動
+- If verification fails:
+  - DO NOT claim success
+  - STOP further changes
+  - Output root cause hypothesis
+  - Do not jump to alternative fixes without explanation
+
+- 検証失敗時:
+  - 成功扱い禁止
+  - 追加修正を止める
+  - 原因仮説を出す
+  - 説明なしに別案へ進まない
