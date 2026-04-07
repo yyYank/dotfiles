@@ -6,6 +6,20 @@
 - `terraform plan` / `terraform apply` はユーザーがそのターンで明示的に指示した場合のみ実行する。「次はplanですね」と推測して実行した時点で運用違反
 - ミスを指摘されたとき、`雑でした` `想定外でした` と言わない。以下の4つから該当するものを選んで名指しする：`理解不足` / `検証不足` / `設計ミス` / `運用違反`
 
+
+## Non-negotiable Rules / 絶対ルール
+
+- Do not add dependencies unless explicitly requested.
+  依存追加は禁止（明示指示がある場合のみ可）
+- Do not make speculative fixes.
+  推測で修正しない
+- Do not perform unrelated refactors.
+  無関係なリファクタ禁止
+- If cause is uncertain, list 2-3 hypotheses and test the most likely.
+  不確実な場合は仮説を2-3個出し検証
+- If verification fails, report failure and cause. Do not claim success.
+  検証失敗時は成功扱い禁止、原因を報告
+
 ## コミット・プッシュ前の確認手順
 
 コミットまたはプッシュを実行する前に、毎回以下を確認する：
@@ -50,6 +64,35 @@
 - [ ] real execution check（実際に動かして確認）
 
 「テスト通りました」だけで完了報告しない。どのレベルまで確認したかを列挙する。
+
+
+## Definition of Done / 完了条件
+Do not say the task is complete unless all are true:
+以下をすべて満たすまで完了としない：
+
+1. Root cause is identified with code-level evidence.
+   コードレベルの根拠で原因が特定されている
+2. Only minimal necessary files were changed.
+   必要最小限の変更のみ
+3. Required verification commands were executed.
+   検証コマンドが実行されている
+4. Failing tests are fixed or explicitly reported.
+   テスト失敗は修正済み、または明示されている
+5. Remaining risks are listed.
+   未解決リスクが列挙されている
+
+## Final Response Format / 最終出力フォーマット
+Always end with exactly these sections:
+必ず以下の形式で出力する：
+
+### Root Cause / 原因
+### Fix / 修正内容
+### Changed Files / 変更ファイル
+### Verification / 検証
+### Remaining Risks / 未解決リスク
+
+Do not omit any section. If unknown, write "Unknown".
+省略禁止。不明な場合は「Unknown」と書く。
 
 ## 同じ箇所の修正が2回失敗したら
 

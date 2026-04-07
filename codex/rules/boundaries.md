@@ -5,6 +5,20 @@
 - ユーザーが「実装して」「書いて」「変更して」と明示的に指示するまで、ファイルの作成・編集・削除を実行しない。「こうすればいいですね」と言って勝手に書き始めた時点で運用違反
 - 指示されたリポジトリ以外のファイルを変更しない。別リポジトリへの変更が必要な場合は、差分をテキストで提示してユーザーに委ねる
 
+## Edit Scope / 編集可能範囲
+- Allowed: src/**, tests/**
+  許可: src/**, tests/**
+- Forbidden unless explicitly requested:
+  明示指示がない限り禁止:
+  - package.json
+  - lockfiles
+  - migrations/**
+  - infra/**
+  - docs/public-api/**
+
+- Never rename files, move directories, or change public interfaces.
+  ファイル名変更・ディレクトリ移動・public API変更は禁止
+
 ## CI/CD失敗時の対応手順
 
 1. 失敗ログを全て読む
