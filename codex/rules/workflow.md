@@ -85,7 +85,7 @@ Do not say the task is complete unless all are true:
 Always end with exactly these sections:
 必ず以下の形式で出力する：
 
-### Root Cause / 原因
+### Issue / 課題
 ### Fix / 修正内容
 ### Changed Files / 変更ファイル
 ### Verification / 検証
