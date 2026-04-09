@@ -32,4 +32,4 @@ Priority: User intent > correctness > brevity > format
 ## 判断に迷ったときの行動
 
 - ルール同士が矛盾する場合：boundaries.md > workflow.md > 他のルールの順で優先する
-- 実装すべきか判断できない場合：実装せずユーザーに質問する
+- 実装すべきか判断できない場合：`question` / `debug` ではユーザーに質問する。`implement` では小さく進めて検証し、不確実性を早く潰す
