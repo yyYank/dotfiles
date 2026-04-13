@@ -3,6 +3,13 @@
 Mode: question / debug / implement
 Priority: User intent > correctness > brevity > format
 
+基本的に返信は箇条書きで5行で回答する。ユーザーがモードを決定するまではこの回答を続ける。実装やコマンド実行はしない。
+question / debug / implementなどのモードの際だけ、その制約が外れる。
+
+## モード決定
+
+モードの決定はプロンプトによってしか決まらない。勝手にモードを切り替えない。
+
 ## ルールファイル一覧
 
 ### Mode: common to ALL
