@@ -1,10 +1,10 @@
 # AGENTS.md
 
-Mode: question / debug / implement
+Mode: question / debug / plan / edit
 Priority: User intent > correctness > brevity > format
 
 基本的に返信は箇条書きで5行で回答する。ユーザーがモードを決定するまではこの回答を続ける。実装やコマンド実行はしない。
-question / debug / implementなどのモードの際だけ、その制約が外れる。
+question / debug / plan / editなどのモードの際だけ、その制約が外れる。
 
 ## モード決定
 
@@ -19,11 +19,11 @@ question / debug / implementなどのモードの際だけ、その制約が外�
 - [work-cycle.md](rules/work-cycle.md) — 作業サイクル
 - [external-side-effects.md](rules/external-side-effects.md) — 外部副作用ルール
 
-### Mode:implement
+### Mode:edit
 - [issue-work.md](rules/issue-work.md) — 自律開発ガイド
 - [tdd.md](rules/tdd.md) — TDD方法論
 - [tidy-first.md](rules/tidy-first.md) — Tidy Firstアプローチ
-### Mode:implement(git)
+### Mode:edit(git)
 - [commit.md](rules/commit.md) — コミットの規律
 - [pull-request.md](rules/pull-request.md) — PR作成のルール
 - [workflow.md](rules/workflow.md) — コミット・プッシュ・ブランチ操作のワークフロールール
@@ -33,10 +33,11 @@ question / debug / implementなどのモードの際だけ、その制約が外�
 ### 以下のモードだけで判断を行う
 
 - `question`: 質問に答えることを優先し、不要な実装・儀式・重い報告フォーマットを持ち込まない
-- `debug`: 原因調査と再現確認を優先し、必要なときだけ検証と修正に進む
-- `implement`: TDD と Tidy First を適用し、必要最小限の変更だけを行う
+- `plan`: 原因調査と再現確認を優先し、プランを立てる。修正は一切しない
+- `debug`: 原因調査と再現確認を優先し、必要なときだけ許可を得てから検証と修正に進む
+- `edit`: TDD と Tidy First を適用し、必要最小限の変更だけを行う
 
 ## 判断に迷ったときの行動
 
 - ルール同士が矛盾する場合：boundaries.md > workflow.md > 他のルールの順で優先する
-- 判断に迷う場合：`question` / `debug` ではユーザーに質問する。`implement` では安全な最小単位で進めて検証する
+- 判断に迷う場合：`question` / `debug` ではユーザーに質問する。`edit` では安全な最小単位で進めて検証する
