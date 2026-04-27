@@ -15,7 +15,7 @@
 | ファイラ | `.config/lf/lfrc`, `.config/lf/preview.sh` |
 | Git | `.gitconfig`, `git/config.*` |
 | Claude Code | `.claude/hooks/update-status.sh`, `claude/CLAUDE.md`, `claude/commands/`, `claude/settings.json`, `claude/skills/` |
-| Codex | `codex/AGENTS.md`, `codex/rules/`, `codex/skills/`, `macOS/setup/sync-codex.sh` |
+| Codex | `codex/AGENTS.md`, `codex/rules/`, `codex/skills/`, `Makefile` |
 | Arch 固有 | `.xmonad/`, `.xmobarrc`, `.Xresources`, `.xinitrc` |
 | セットアップ | `macOS/setup/tool-install.sh`, `arch/setup/tool-install.sh` |
 
@@ -46,7 +46,13 @@ bash macOS/setup/tool-install.sh
 Codex 用設定を `$HOME/.codex` へ同期する場合:
 
 ```bash
-bash macOS/setup/sync-codex.sh
+make deploy codex
+```
+
+Claude 用設定を `$HOME/.claude` へ同期する場合:
+
+```bash
+make deploy claude
 ```
 
 ### Arch Linux
