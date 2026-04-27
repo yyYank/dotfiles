@@ -1,53 +1,37 @@
+# Claude Code Repo Rules
 
 ## Purpose
-- Claude Code は、広く調べる役ではなく、狭い範囲を安全に処理する実装補助として使う
-- 既定動作は、最小探索・最小変更・短い出力とする
+
+- このリポジトリでの Claude Code は、常時ルールを最小限に保ち、必要な制約だけを task ごとに追加する
+- 既定動作は、最小変更・短い出力・必要十分な探索とする
 
 ## Modes
-- このリポジトリでは、依頼を `question` / `debug` / `plan` / `edit` のいずれかとして扱う
+
+- 依頼は `question` / `debug` / `plan` / `edit` のいずれかとして扱う
 - mode が明示されていない場合は `question`
 - `edit` 以外ではコードや設定を変更しない
 
-## Default Rules
-- 指定されていないファイル、ディレクトリ、Issue、PR、Docs は読まない
-- 指定されていないテスト、lint、build は実行しない
-- 推測で補完しない
-- 横展開しない
-- 関連しそうという理由だけで別ディレクトリへ飛ばない
-- 不要な subagent の利用や自動委譲を避け、常駐ルールは最小限に保つ
-- 巨大ログ、lock file、生成物、vendor、dist、coverage は読まない
-- 長文説明、複数案比較、広い調査はしない
+## Absolute Principles
 
-## ルールファイル一覧
+1. mode に従う。勝手に切り替えない。
+2. 指定された範囲だけを扱う。範囲外へ広げる必要がある場合だけ短く確認する。
+3. 不明点は推測で埋めず、作業継続に必要な最小限だけ確認する。
+4. 外部副作用のある操作は、実行前に対象と影響を確認する。
+5. 長い手順や詳細な品質基準は常時ルールに置かず、task 別プロンプトで追加する。
 
-### Mode: common to ALL
-- [boundaries.md](./rules/boundaries.md) — 自律行動の境界ルール
-- [release-artifacts.md](./rules/release-artifacts.md) — リリース成果物に関するルール
-- [work-cycle.md](./rules/work-cycle.md) — 作業サイクル
-- [external-side-effects.md](./rules/external-side-effects.md) — 外部副作用ルール
+## Load On Demand
 
-### Mode:edit
-- [issue-work.md](./rules/issue-work.md) — 自律開発ガイド
-- [tdd.md](./rules/tdd.md) — TDD方法論
-- [tidy-first.md](./rules/tidy-first.md) — Tidy Firstアプローチ
-### Mode:edit(git)
-- [commit.md](./rules/commit.md) — コミットの規律
-- [pull-request.md](./rules/pull-request.md) — PR作成のルール
-- [workflow.md](./rules/workflow.md) — コミット・プッシュ・ブランチ操作のワークフロールール
+- 共通の境界ルール: [rules/boundaries.md](./rules/boundaries.md)
+- 外部副作用がある作業: [rules/external-side-effects.md](./rules/external-side-effects.md)
+- リリース成果物を触る作業: [rules/release-artifacts.md](./rules/release-artifacts.md)
+- secret を含む作業: [rules/secrets.md](./rules/secrets.md)
+- 実装時の詳細手順: [commands/fix.md](./commands/fix.md)
+- 調査と計画の手順: [commands/plan.md](./commands/plan.md)
+- レビュー時の観点: [commands/review.md](./commands/review.md)
 
-## Search
-- 検索対象は、ユーザーが指定した範囲のみに限定する
-- `rg` / `grep` は、指定ディレクトリ・指定キーワードのみで使う
-- 見つからなければ、勝手に広げず停止する
+## Mode Defaults
 
-## Mode Rules
-- `question`: 質問に答える。変更しない。必要最小限だけ読む
-- `debug`: 原因特定に集中する。変更しない。結果は「原因候補 / 根拠 / 次に見るべき箇所」を短く返す
-- `plan`: 明示指示がある時だけ使う。最大3ステップ。計画中は実装しない
-- `edit`: 指定ファイルのみ編集する。最短差分を優先し、リファクタは明示依頼がある場合のみ行う
-
-## Stop
-- 指定範囲外の調査が必要
-- 要件が不足していて推測が必要
-- 変更対象の特定ができない
-- この場合は停止し、不足情報だけ短く返す
+- `question`: 質問に答える。必要最小限だけ読む。変更しない。
+- `debug`: 原因候補と根拠を絞って返す。検証や修正が必要なら先に確認する。
+- `plan`: 調査結果をもとに短い実行計画を作る。実装しない。
+- `edit`: 指定範囲に対して最小差分で変更する。必要な手順は `commands/fix.md` を使う。

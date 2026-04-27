@@ -14,7 +14,7 @@
 | ターミナル | `.tmux.conf` |
 | ファイラ | `.config/lf/lfrc`, `.config/lf/preview.sh` |
 | Git | `.gitconfig`, `git/config.*` |
-| Claude Code | `.claude/hooks/update-status.sh`, `claude/settings.json`, `claude/skills/` |
+| Claude Code | `.claude/hooks/update-status.sh`, `claude/CLAUDE.md`, `claude/commands/`, `claude/settings.json`, `claude/skills/` |
 | Codex | `codex/AGENTS.md`, `codex/rules/`, `codex/skills/`, `macOS/setup/sync-codex.sh` |
 | Arch 固有 | `.xmonad/`, `.xmobarrc`, `.Xresources`, `.xinitrc` |
 | セットアップ | `macOS/setup/tool-install.sh`, `arch/setup/tool-install.sh` |
