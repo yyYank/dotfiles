@@ -7,7 +7,8 @@
     "allow": [
       "Bash(npm run lint)",
       "Bash(npm run test *)",
-      "Read(~/.zshrc)"
+      "Read(~/.zshrc)",
+      "mcp__pencil"
     ],
     "deny": [
       "Bash(curl *)",
@@ -30,8 +31,7 @@
       "Bash(terraform *)"
     ]
   },
-  "model": "opus",
-  "effortLevel": "xhigh",
+  "model": "claude-opus-4-5-20251101",
   "hooks": {
     "Stop": [
       {
@@ -52,9 +52,21 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat ~/.claude/guardrail_prompt.txt"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
-  }
+    "gopls-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "xhigh"
 }
