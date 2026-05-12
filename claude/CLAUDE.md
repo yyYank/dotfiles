@@ -1,3 +1,5 @@
+返答は必ず5行以内。ユーザーの許可が出るまでコード変更は絶対にしない。
+
 # Claude Code Repo Rules
 
 ## Purpose
