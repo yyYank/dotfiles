@@ -31,7 +31,9 @@
       "Bash(git push --force*)",
       "Bash(git rebase *)",
       "Bash(git reset --hard*)",
-      "Bash(terraform *)"
+      "Bash(git commit --amend*)",
+      "Bash(terraform *)",
+      "Write(~/.claude/projects/*/memory/*)"
     ]
   },
   "model": "claude-opus-4-6",
@@ -69,7 +71,8 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true
   },
   "effortLevel": "high"
 }
