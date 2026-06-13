@@ -34,6 +34,7 @@
       "Bash(terraform *)",
       "Bash(git commit --amend*)",
       "Bash(git filter-branch*)",
+      "Bash(gh api */pulls/*/reviews*)",
       "Read(~/.claude/projects/**/memory/**)",
       "Write(~/.claude/projects/**/memory/**)",
       "Edit(~/.claude/projects/**/memory/**)"
@@ -74,7 +75,8 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true
   },
   "effortLevel": "high"
 }

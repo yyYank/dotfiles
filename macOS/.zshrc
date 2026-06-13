@@ -60,3 +60,11 @@ export PATH="/Users/yy_yank/.rd/bin:$PATH"
 
 # load local settings (gitignored)
 [ -f ~/.zsh/local.zsh ] && source ~/.zsh/local.zsh
+
+# pnpm
+export PNPM_HOME="/Users/yy_yank/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
