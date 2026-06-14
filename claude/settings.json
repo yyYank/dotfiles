@@ -35,6 +35,7 @@
       "Bash(git commit --amend*)",
       "Bash(git filter-branch*)",
       "Bash(gh api */pulls/*/reviews*)",
+      "Bash(gh api */pulls/*/comments*)",
       "Read(~/.claude/projects/**/memory/**)",
       "Write(~/.claude/projects/**/memory/**)",
       "Edit(~/.claude/projects/**/memory/**)"
