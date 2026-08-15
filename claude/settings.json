@@ -64,6 +64,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/enforce-brevity.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/require-uncertainty.sh"
           }
         ]
       }
