@@ -60,6 +60,15 @@
             "command": "~/.claude/hooks/block-dangerous-git.sh"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/edit-permit-gate.sh"
+          }
+        ]
       }
     ],
     "Stop": [
@@ -76,6 +85,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/require-uncertainty.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/no-forge-ahead.sh"
           }
         ]
       }
@@ -96,6 +109,10 @@
           {
             "type": "command",
             "command": "cat ~/.claude/guardrail_prompt.txt"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/permit-flag.sh"
           }
         ]
       }
