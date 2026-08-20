@@ -38,4 +38,9 @@ if has "${B}checkout[[:space:]]+(--[[:space:]]+)?\\.${E}"; then
   deny "ブロック: checkout . (変更破棄)"
 fi
 
+# commit メッセージへの Claude/Anthropic 系文言の混入を常時 deny（permit フラグの有無に関係なく効く）
+if has "${B}commit${E}" && printf '%s' "$cmd" | grep -Eqi 'claude|anthropic|co-authored-by|generated with'; then
+  deny "ブロック: commit に Claude/Anthropic 系の文言を含めることは禁止"
+fi
+
 exit 0

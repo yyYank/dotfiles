@@ -41,7 +41,7 @@
       "Edit(~/.claude/projects/**/memory/**)"
     ]
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -58,6 +58,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/block-dangerous-git.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/bash-permit-gate.sh"
           }
         ]
       },
@@ -121,7 +125,9 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "vercel@claude-plugins-official": true
+    "vercel@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
   },
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "agentPushNotifEnabled": true
 }
