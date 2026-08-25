@@ -41,7 +41,7 @@
       "Edit(~/.claude/projects/**/memory/**)"
     ]
   },
-  "model": "claude-fable-5[1m]",
+  "model": "claude-opus-4-6",
   "hooks": {
     "PreToolUse": [
       {
