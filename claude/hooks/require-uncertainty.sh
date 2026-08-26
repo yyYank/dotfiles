@@ -15,7 +15,7 @@ text=$(jq -rs '[.[] | select(.type=="assistant") | .message.content[]? | select(
 [ -z "$text" ] && exit 0
 
 if ! printf '%s' "$text" | grep -q "不明点や独自判断："; then
-  jq -cn --arg r "応答に「不明点や独自判断：」欄がない。不明点・推測・独自判断があれば列挙し、無ければ「なし」と明記して書き直すこと。" \
+  jq -cn --arg r "応答に「不明点や独自判断：」欄つけてね！不明点・推測・独自判断があれば列挙し、無ければ「なし」と明記。面倒だけど、円滑にコミュニケーションするためだよ！" \
     '{decision:"block", reason:$r}'
 fi
 exit 0

@@ -35,16 +35,16 @@ fi
 # git: 書き込み系サブコマンドを deny（status/diff/log/show 等の読み取りは通す）
 GIT_WRITE='(commit|push|merge|rebase|cherry-pick|revert|am|apply|reset|restore|switch|checkout|clean|mv|filter-branch|update-ref|symbolic-ref|gc|prune|tag)'
 if has "${B}git${E}" && has "${B}${GIT_WRITE}${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git の書き込み系コマンドは実行できない。内容を提示して許可を求めること。"
+  deny "直近のユーザー発言に「許可」が無いため git の書き込み系コマンドは実行できません。内容を提示して「許可をいただけますか？」依頼をお願いします。"
 fi
 if has "${B}git${E}" && has "${B}stash${E}" && ! has "${B}stash[[:space:]]+(list|show)${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git stash の書き込み系は実行できない。"
+  deny "直近のユーザー発言に「許可」が無いため git stash の書き込み系は実行できません。"
 fi
 if has "${B}git${E}" && has "${B}branch${E}" && has "${B}(-d|-D|-m|-M|--delete|--move)${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git branch の変更操作は実行できない。"
+  deny "直近のユーザー発言に「許可」が無いため git branch の変更操作は実行できません。"
 fi
 if has "${B}git${E}" && has "${B}remote${E}" && has "${B}(add|remove|rm|rename|set-url)${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git remote の変更操作は実行できない。"
+  deny "直近のユーザー発言に「許可」が無いため git remote の変更操作は実行できません。"
 fi
 
 exit 0
