@@ -1,6 +1,7 @@
 #!/bin/bash
-# Stop hook: 最終応答に「不明点や独自判断：」欄が無ければ
-# decision:block で書き直しを強制する。不明点と独自判断の申告を必須化する。
+# Stop hook: 最終応答が所定の5セクション形式を満たしていなければ
+# decision:block で書き直しを強制する。
+# 必須セクション: プロンプトへの回答／結論／理由／その他／不明点や独自判断
 
 input=$(cat)
 
@@ -14,8 +15,20 @@ tp=$(printf '%s' "$input" | jq -r '.transcript_path // empty')
 text=$(jq -rs '[.[] | select(.type=="assistant") | .message.content[]? | select(.type=="text") | .text] | last // empty' "$tp")
 [ -z "$text" ] && exit 0
 
-if ! printf '%s' "$text" | grep -q "不明点や独自判断："; then
-  jq -cn --arg r "応答に「不明点や独自判断：」欄つけてね！不明点・推測・独自判断があれば列挙し、無ければ「なし」と明記。面倒だけど、円滑にコミュニケーションするためだよ！" \
+missing=""
+for section in "プロンプトへの回答：" "結論：" "理由：" "その他：" "不明点や独自判断："; do
+  if ! printf '%s' "$text" | grep -qF "$section"; then
+    missing="${missing}${section} "
+  fi
+done
+
+if [ -n "$missing" ]; then
+  jq -cn --arg r "応答に必須セクションが不足しています: ${missing}。以下の形式で書き直してください。
+プロンプトへの回答：（標題化禁止。話者の意図・気持ちを汲み取った応答を書く）
+結論：
+理由：
+その他：
+不明点や独自判断：" \
     '{decision:"block", reason:$r}'
 fi
 exit 0

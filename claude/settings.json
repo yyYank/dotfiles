@@ -49,6 +49,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/halt-on-uncertainty.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-env-read.sh"
           }
         ]
       },
@@ -93,6 +97,14 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/no-forge-ahead.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-delegate-command.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-doubt-user.sh"
           }
         ]
       }

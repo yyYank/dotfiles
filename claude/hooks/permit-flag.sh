@@ -7,7 +7,7 @@ prompt=$(printf '%s' "$input" | jq -r '.prompt // ""')
 # サブエージェントは別session_idになるため、フラグは全セッション共通にする(B案)
 flag="/tmp/claude-edit-permit"
 
-if printf '%s' "$prompt" | grep -q "許可"; then
+if [ "$(printf '%s' "$prompt" | tr -d '[:space:]')" = "y" ]; then
   touch "$flag"
 else
   rm -f "$flag"

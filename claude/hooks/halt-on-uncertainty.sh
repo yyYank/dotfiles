@@ -24,8 +24,8 @@ texts=$(jq -rs '
 ' "$tp" 2>/dev/null)
 [ -z "$texts" ] && exit 0
 
-bad=$(printf '%s' "$texts" | grep "不明点や独自判断：" | grep -cvE "不明点や独自判断：[[:space:]]*なし")
+bad=$(printf '%s' "$texts" | grep "不明点・独自判断：" | grep -cvE "不明点・独自判断：[[:space:]]*なし")
 if [ "${bad:-0}" -gt 0 ]; then
-  jq -cn '{hookSpecificOutput:{hookEventName:"PreToolUse",permissionDecision:"deny",permissionDecisionReason:"「不明点や独自判断」を申告した状態でのツール実行は禁止です。ユーザーに質問し、不明点や独自判断がない状態になるよう努めてください。"}}'
+  jq -cn '{hookSpecificOutput:{hookEventName:"PreToolUse",permissionDecision:"deny",permissionDecisionReason:"「不明点・独自判断」を申告した状態でのツール実行は禁止です。ユーザーに質問し、不明点や独自判断がない状態になるよう努めてください。"}}'
 fi
 exit 0
