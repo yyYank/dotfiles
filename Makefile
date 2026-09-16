@@ -44,6 +44,8 @@ claude:
 	diff -u "$(CLAUDE_DST)/settings.json" "$(CLAUDE_SRC)/settings.json" || true; \
 	echo "== diff: $(CLAUDE_SRC)/statusline-command.sh -> $(CLAUDE_DST)/statusline-command.sh =="; \
 	diff -u "$(CLAUDE_DST)/statusline-command.sh" "$(CLAUDE_SRC)/statusline-command.sh" || true; \
+	echo "== diff: $(CLAUDE_SRC)/guardrail_prompt.txt -> $(CLAUDE_DST)/guardrail_prompt.txt =="; \
+	diff -u "$(CLAUDE_DST)/guardrail_prompt.txt" "$(CLAUDE_SRC)/guardrail_prompt.txt" || true; \
 	if [ -d "$(CLAUDE_SRC)/commands" ]; then \
 		echo "== diff: $(CLAUDE_SRC)/commands -> $(CLAUDE_DST)/commands =="; \
 		diff -ruN "$(CLAUDE_DST)/commands" "$(CLAUDE_SRC)/commands" || true; \
@@ -63,7 +65,7 @@ claude:
 	printf "Proceed with deploy to $(CLAUDE_DST)? [yes/no] "; \
 	read answer; \
 	case "$$answer" in yes) ;; *) echo "Canceled."; exit 1 ;; esac; \
-	cp -f "$(CLAUDE_SRC)/CLAUDE.md" "$(CLAUDE_SRC)/settings.json" "$(CLAUDE_SRC)/statusline-command.sh" "$(CLAUDE_DST)/"; \
+	cp -f "$(CLAUDE_SRC)/CLAUDE.md" "$(CLAUDE_SRC)/settings.json" "$(CLAUDE_SRC)/statusline-command.sh" "$(CLAUDE_SRC)/guardrail_prompt.txt" "$(CLAUDE_DST)/"; \
 	if [ -d "$(CLAUDE_SRC)/commands" ]; then cp -R "$(CLAUDE_SRC)/commands/." "$(CLAUDE_DST)/commands/"; fi; \
 	if [ -d "$(CLAUDE_SRC)/hooks" ]; then cp -R "$(CLAUDE_SRC)/hooks/." "$(CLAUDE_DST)/hooks/"; fi; \
 	if [ -d "$(CLAUDE_SRC)/rules" ]; then cp -R "$(CLAUDE_SRC)/rules/." "$(CLAUDE_DST)/rules/"; fi; \
