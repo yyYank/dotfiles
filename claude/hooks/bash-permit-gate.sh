@@ -1,5 +1,5 @@
 #!/bin/bash
-# PreToolUse(Bash): 直近のユーザー発言に「許可」が無い間は、Bash 経由の gh / git 書き込み系を
+# PreToolUse(Bash): 直近のユーザー発言に「y」(許可)が無い間は、Bash 経由の gh / git 書き込み系を
 # 機械的に deny する（edit-permit-gate.sh と同じフラグを共有。読み取り系は許可不要）。
 
 input=$(cat)
@@ -28,23 +28,23 @@ if has "${B}gh${E}"; then
   if ! has "${B}gh[[:space:]]+[a-z-]+[[:space:]]+(list|view|status|diff|checks)${E}" \
      && ! has "${B}gh[[:space:]]+auth[[:space:]]+status${E}" \
      && ! has "${B}gh[[:space:]]+(--version|--help|help)${E}"; then
-    deny "直近のユーザー発言に「許可」が無いため gh の書き込み系コマンドは実行できない。内容を提示して許可を求めること。"
+    deny "直近のユーザー発言に「y」（許可）が無いため gh の書き込み系コマンドは実行できない。内容を提示して許可を求めること。"
   fi
 fi
 
 # git: 書き込み系サブコマンドを deny（status/diff/log/show 等の読み取りは通す）
 GIT_WRITE='(commit|push|merge|rebase|cherry-pick|revert|am|apply|reset|restore|switch|checkout|clean|mv|filter-branch|update-ref|symbolic-ref|gc|prune|tag)'
 if has "${B}git${E}" && has "${B}${GIT_WRITE}${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git の書き込み系コマンドは実行できません。内容を提示して「許可をいただけますか？」依頼をお願いします。"
+  deny "直近のユーザー発言に「y」（許可）が無いため git の書き込み系コマンドは実行できません。内容を提示して「許可をいただけますか？」依頼をお願いします。"
 fi
 if has "${B}git${E}" && has "${B}stash${E}" && ! has "${B}stash[[:space:]]+(list|show)${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git stash の書き込み系は実行できません。"
+  deny "直近のユーザー発言に「y」（許可）が無いため git stash の書き込み系は実行できません。"
 fi
 if has "${B}git${E}" && has "${B}branch${E}" && has "${B}(-d|-D|-m|-M|--delete|--move)${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git branch の変更操作は実行できません。"
+  deny "直近のユーザー発言に「y」（許可）が無いため git branch の変更操作は実行できません。"
 fi
 if has "${B}git${E}" && has "${B}remote${E}" && has "${B}(add|remove|rm|rename|set-url)${E}"; then
-  deny "直近のユーザー発言に「許可」が無いため git remote の変更操作は実行できません。"
+  deny "直近のユーザー発言に「y」（許可）が無いため git remote の変更操作は実行できません。"
 fi
 
 exit 0
