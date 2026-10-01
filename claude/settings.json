@@ -38,10 +38,24 @@
       "Bash(gh api */pulls/*/comments*)",
       "Read(~/.claude/projects/**/memory/**)",
       "Write(~/.claude/projects/**/memory/**)",
-      "Edit(~/.claude/projects/**/memory/**)"
+      "Edit(~/.claude/projects/**/memory/**)",
+      "Bash(tccutil *)",
+      "Bash(csrutil *)",
+      "Bash(spctl *)",
+      "Bash(systemsetup *)",
+      "Bash(nvram *)",
+      "Bash(bless *)",
+      "Bash(defaults write com.apple.TCC*)",
+      "Bash(sudo tccutil *)",
+      "Bash(sudo csrutil *)",
+      "Bash(sudo spctl *)",
+      "Bash(sudo systemsetup *)",
+      "Bash(sudo nvram *)",
+      "Bash(sudo bless *)",
+      "Bash(sudo defaults write com.apple.TCC*)"
     ]
   },
-  "model": "claude-opus-4-6",
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -140,6 +154,8 @@
     "vercel@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
+  "feedbackSurveyRate": 0,
+  "feedbackDrafts": "off",
   "effortLevel": "high",
   "agentPushNotifEnabled": true
 }
