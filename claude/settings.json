@@ -119,6 +119,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/block-doubt-user.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/require-permit-phrase.sh"
           }
         ]
       }
