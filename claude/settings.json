@@ -123,6 +123,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/require-permit-phrase.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/suggest-dialog-for-options.sh"
           }
         ]
       }

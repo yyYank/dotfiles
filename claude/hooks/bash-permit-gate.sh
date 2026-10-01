@@ -6,7 +6,11 @@ input=$(cat)
 cmd=$(printf '%s' "$input" | jq -r '.tool_input.command // empty')
 [ -z "$cmd" ] && exit 0
 
-flag="/tmp/claude-edit-permit"
+# フラグは session 単位(permit-flag.sh と対応)
+sid=$(printf '%s' "$input" | jq -r '.session_id // "unknown"')
+flag="/tmp/claude-edit-permit-${sid}"
+log="/tmp/claude-permit.log"
+printf '%s bash-gate flag=%s cmd=%.40s\n' "$(date +%FT%T)" "$([ -f "$flag" ] && echo yes || echo no)" "$cmd" >> "$log"
 if [ -f "$flag" ]; then
   exit 0
 fi
