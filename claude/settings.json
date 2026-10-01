@@ -93,17 +93,6 @@
         ]
       }
     ],
-    "PostToolUse": [
-      {
-        "matcher": "AskUserQuestion",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/permit-from-dialog.sh"
-          }
-        ]
-      }
-    ],
     "Stop": [
       {
         "hooks": [
