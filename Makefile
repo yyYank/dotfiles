@@ -70,4 +70,17 @@ claude:
 	if [ -d "$(CLAUDE_SRC)/hooks" ]; then cp -R "$(CLAUDE_SRC)/hooks/." "$(CLAUDE_DST)/hooks/"; fi; \
 	if [ -d "$(CLAUDE_SRC)/rules" ]; then cp -R "$(CLAUDE_SRC)/rules/." "$(CLAUDE_DST)/rules/"; fi; \
 	if [ -d "$(CLAUDE_SRC)/skills" ]; then cp -R "$(CLAUDE_SRC)/skills/." "$(CLAUDE_DST)/skills/"; fi; \
-	echo "Deployed Claude config to $(CLAUDE_DST)"
+	echo "Deployed Claude config to $(CLAUDE_DST)"; \
+	echo "== post-deploy check: $(CLAUDE_DST) 側にだけ在るファイル =="; \
+	stale=0; \
+	for d in commands hooks rules; do \
+		if [ -d "$(CLAUDE_SRC)/$$d" ]; then \
+			out=$$(diff -rq "$(CLAUDE_DST)/$$d" "$(CLAUDE_SRC)/$$d" 2>/dev/null | grep "^Only in $(CLAUDE_DST)/$$d" || true); \
+			if [ -n "$$out" ]; then echo "$$out"; stale=1; fi; \
+		fi; \
+	done; \
+	if [ "$$stale" = "1" ]; then \
+		echo "(repo に無い残置ファイルです。不要なら手動で削除してください)"; \
+	else \
+		echo "残置ファイルなし"; \
+	fi
