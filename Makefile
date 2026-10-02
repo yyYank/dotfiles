@@ -38,6 +38,7 @@ claude:
 	@set -eu; \
 	test -f "$(CLAUDE_SRC)/CLAUDE.md" || { echo "missing: $(CLAUDE_SRC)/CLAUDE.md" >&2; exit 1; }; \
 	mkdir -p "$(CLAUDE_DST)" "$(CLAUDE_DST)/commands" "$(CLAUDE_DST)/hooks" "$(CLAUDE_DST)/rules" "$(CLAUDE_DST)/skills"; \
+	if [ -n "$(DIFF)" ]; then \
 	echo "== diff: $(CLAUDE_SRC)/CLAUDE.md -> $(CLAUDE_DST)/CLAUDE.md =="; \
 	diff -u "$(CLAUDE_DST)/CLAUDE.md" "$(CLAUDE_SRC)/CLAUDE.md" || true; \
 	echo "== diff: $(CLAUDE_SRC)/settings.json -> $(CLAUDE_DST)/settings.json =="; \
@@ -62,6 +63,32 @@ claude:
 		echo "== diff: $(CLAUDE_SRC)/skills -> $(CLAUDE_DST)/skills =="; \
 		diff -ruN "$(CLAUDE_DST)/skills" "$(CLAUDE_SRC)/skills" || true; \
 	fi; \
+	fi; \
+	echo "== 変更サマリ: $(CLAUDE_SRC) -> $(CLAUDE_DST) =="; \
+	warn=$$(mktemp); \
+	for f in CLAUDE.md settings.json statusline-command.sh guardrail_prompt.txt; do \
+		src="$(CLAUDE_SRC)/$$f"; dst="$(CLAUDE_DST)/$$f"; \
+		[ -f "$$src" ] || continue; \
+		if [ ! -f "$$dst" ]; then echo "  新規 $$f"; \
+		elif ! cmp -s "$$dst" "$$src"; then \
+			if [ "$$dst" -nt "$$src" ]; then echo "  [巻き戻し注意] $$f (配置先が新しい)"; echo "$$f" >> "$$warn"; \
+			else echo "  更新 $$f"; fi; \
+		fi; \
+	done; \
+	for d in commands hooks rules skills; do \
+		[ -d "$(CLAUDE_SRC)/$$d" ] || continue; \
+		find "$(CLAUDE_SRC)/$$d" -type f -not -path "*/synced/*" | sort | while read -r src; do \
+			rel=$${src#$(CLAUDE_SRC)/}; dst="$(CLAUDE_DST)/$$rel"; \
+			if [ ! -f "$$dst" ]; then echo "  新規 $$rel"; \
+			elif ! cmp -s "$$dst" "$$src"; then \
+				if [ "$$dst" -nt "$$src" ]; then echo "  [巻き戻し注意] $$rel (配置先が新しい)"; echo "$$rel" >> "$$warn"; \
+				else echo "  更新 $$rel"; fi; \
+			fi; \
+		done; \
+	done; \
+	if [ -s "$$warn" ]; then echo "!! 配置先の方が新しいファイルが $$(wc -l < "$$warn" | tr -d " ") 件。上書きで失われます"; fi; \
+	rm -f "$$warn"; \
+	echo "(全文 diff: make deploy claude DIFF=1)"; \
 	printf "Proceed with deploy to $(CLAUDE_DST)? [yes/no] "; \
 	read answer; \
 	case "$$answer" in yes) ;; *) echo "Canceled."; exit 1 ;; esac; \
