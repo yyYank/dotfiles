@@ -18,7 +18,7 @@ PHRASE='許可いただけますか？ (y/n)'
 printf '%s' "$text" | grep -qF "$PHRASE" && exit 0
 
 # 許可を求めている言い回し
-if printf '%s' "$text" | grep -Eq 'y *(を)?(ください|下さい)|許可(を)?(ください|下さい|いただ)|してよいか'; then
+if printf '%s' "$text" | grep -Eq '(^|[^[:alnum:]])y.{0,4}(ください|下さい)|許可(を)?(ください|下さい|いただ)|してよいか'; then
   jq -cn --arg r "許可を求める時は固定文「${PHRASE}」で聞いてね。言い回しを変えずに、最終行をその文にして書き直して。" \
     '{decision:"block", reason:$r}'
 fi
