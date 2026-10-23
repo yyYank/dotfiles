@@ -18,7 +18,7 @@ stripped=$(printf '%s' "$text" | sed '/^```/,/^```/d')
 chars=$(printf '%s' "$stripped" | tr -d '[:space:]' | wc -m | tr -d ' ')
 lines=$(printf '%s' "$stripped" | grep -c .)
 
-if [ "$chars" -gt 500 ] || [ "$lines" -gt 15 ]; then
+if [ "$chars" -gt 500 ] || [ "$lines" -gt 5 ]; then
   jq -cn --arg r "応答が制限超過(${chars}字/${lines}行)。短くまとめてね！ユーザーの時間を大切にするのがより良いAIエージェントだよ。箇条書きは最大5行（前後の文言はOK）・全体400文字以下で。" \
     '{decision:"block", reason:$r}'
 fi
